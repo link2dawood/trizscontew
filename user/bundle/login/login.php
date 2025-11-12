@@ -30,32 +30,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($password)){
         $password_err = "Please enter your password.";
     }
-    // Compare password in database
-    else{
-            $sql = "SELECT password FROM users WHERE email = '$email' ";
-             if($result = mysqli_query($dbconnected, $sql)){
-                $rowCount = mysqli_num_rows($result);
-                  if($rowCount == 1){
-                     while($row = mysqli_fetch_array($result)){                                 
-                       $db_pass = $row['password'];
-                          if ($password !=$db_pass) {
-                           $password_err ="Invalid password";
-                        }
-
-                    }
-
-                     mysqli_free_result($result);
-                } else{
-                     $password_err = "Invalid Email address";
-            }
-        }                      
- 
-    }
-    
     // Validate credentials
     if(empty($email_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT id, email, password FROM users WHERE email = ?";
+        $sql = "SELECT id, email, password, fname FROM users WHERE email = ?";
         
         // initialize the prepare statement.
         $stmt = mysqli_stmt_init($dbconnected);
@@ -73,22 +51,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if(mysqli_stmt_num_rows($stmt) == 1){    
 
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $id, $email, $password);
+                    mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password, $fname);
                     if(mysqli_stmt_fetch($stmt)){
-                        $password_hash = password_hash($password, PASSWORD_DEFAULT);
-                         if(password_verify($password, $password_hash)){
+                        if(password_verify($password, $hashed_password) || hash_equals($hashed_password, $password)){
 
-                            // Password is correct, so start a new session
-                            session_start();
-                            
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["email"] = $email;
                             $_SESSION["fname"] = $fname;
 
-
-                            
                             // Redirect user to welcome page
                             header("location: dashboard");
                         } else{

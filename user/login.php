@@ -66,7 +66,44 @@ foreach (glob("bundle/login/login.php") as $login)
                 </div> -->
             </div>
             <div class="login-right">
-
+                <div class="login-form">
+                    <h3 class="mb-3">Log In</h3>
+                    <?php if(!empty($email_err) || !empty($password_err)): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo htmlspecialchars($email_err ?: $password_err); ?>
+                        </div>
+                    <?php endif; ?>
+                    <form method="post" action="">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                class="form-control"
+                                value="<?php echo htmlspecialchars($email); ?>"
+                                required
+                            >
+                            <?php if(!empty($email_err)): ?>
+                                <div class="form-text text-danger"><?php echo htmlspecialchars($email_err); ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="form-control"
+                                required
+                            >
+                            <?php if(!empty($password_err)): ?>
+                                <div class="form-text text-danger"><?php echo htmlspecialchars($password_err); ?></div>
+                            <?php endif; ?>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -75,7 +112,6 @@ foreach (glob("bundle/login/login.php") as $login)
     <div class="footer-c"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="<?php echo($file)?>"></script>
     <script src="<?php echo($js)?>translate_only.js"></script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script type="text/javascript" src="//translate.google.com/#en/hi/Hello"></script> 

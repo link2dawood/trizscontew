@@ -36,7 +36,9 @@ if((!empty($password)) && (!empty($email))) {
                 
                         // Retrieve individual field value
 
-                        if($password == $row['password']) {
+                        $stored_password = $row['password'];
+                        $password_matches = password_verify($password, $stored_password) || hash_equals($stored_password, $password);
+                        if($password_matches) {
                             if($type === 'first') {
                                 if($row['otp_2fa'] === 'yes') {
                                     echo 'yes';
