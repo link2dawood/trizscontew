@@ -1,0 +1,1 @@
+$("#datepicker-1").datepicker({orientation:"bottom auto",todayHighlight:!0}),$("#datepicker-2").datepicker({orientation:"bottom auto",todayHighlight:!0});

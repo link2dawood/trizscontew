@@ -1,0 +1,1 @@
+$(".js-sidebar-logo").click(function(){$(".js-sidebar").toggleClass("expanded")}),$(".js-sidebar-menu__hamburger-menu").click(function(){$(".js-sidebar").toggleClass("expanded")});

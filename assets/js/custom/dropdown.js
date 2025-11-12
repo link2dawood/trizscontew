@@ -1,0 +1,1 @@
+$(".standard-card__item-arrow").each(function(){$(this).click(function(){$(this).parent().parent().toggleClass("collapsed")})});

@@ -1,0 +1,33 @@
+# Composer dependencies
+/vendor/
+/composer.lock
+
+# Laravel specific
+.env
+.env.backup
+/storage/*.key
+/storage/framework/cache/data/*
+/storage/logs/*
+/storage/debugbar/*
+/bootstrap/cache/*.php
+
+# Node modules (if using npm/yarn)
+node_modules/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
+
+# PHPUnit
+/phpunit.xml
+/.phpunit.result.cache

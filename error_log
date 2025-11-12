@@ -1,0 +1,5 @@
+[07-Aug-2025 13:38:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysqli_connect() in /home/aktahgbi/icapitaloption.tcfbonline.live/user/bundle/db/config.php:10
+Stack trace:
+#0 /home/aktahgbi/icapitaloption.tcfbonline.live/index.php(4): include_once()
+#1 {main}
+  thrown in /home/aktahgbi/icapitaloption.tcfbonline.live/user/bundle/db/config.php on line 10

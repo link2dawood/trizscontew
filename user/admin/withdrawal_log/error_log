@@ -1,0 +1,73 @@
+[27-May-2021 20:51:57 Etc/UTC] PHP Warning:  require(../vendor/autoload.php): failed to open stream: No such file or directory in /home/powenzua/fortunestakeplus.com/index.php on line 15
+[27-May-2021 20:51:57 Etc/UTC] PHP Warning:  require(../vendor/autoload.php): failed to open stream: No such file or directory in /home/powenzua/fortunestakeplus.com/index.php on line 15
+[27-May-2021 20:51:57 Etc/UTC] PHP Fatal error:  require(): Failed opening required '../vendor/autoload.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/powenzua/fortunestakeplus.com/index.php on line 15
+[27-May-2021 20:52:08 Etc/UTC] PHP Warning:  require(../vendor/autoload.php): failed to open stream: No such file or directory in /home/powenzua/fortunestakeplus.com/index.php on line 15
+[27-May-2021 20:52:08 Etc/UTC] PHP Warning:  require(../vendor/autoload.php): failed to open stream: No such file or directory in /home/powenzua/fortunestakeplus.com/index.php on line 15
+[27-May-2021 20:52:08 Etc/UTC] PHP Fatal error:  require(): Failed opening required '../vendor/autoload.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/powenzua/fortunestakeplus.com/index.php on line 15
+[27-May-2021 20:54:22 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer\PHPMailer\PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 18
+[27-May-2021 20:54:54 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer\PHPMailer\PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 18
+[27-May-2021 21:28:58 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 24
+[27-May-2021 21:29:01 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 24
+[27-May-2021 21:29:05 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 24
+[27-May-2021 21:29:07 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 24
+[27-May-2021 21:29:10 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 24
+[27-May-2021 21:29:13 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 24
+[27-May-2021 21:29:37 Etc/UTC] PHP Fatal error:  Uncaught Error: Class 'PHPMailer' not found in /home/powenzua/fortunestakeplus.com/index.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/index.php on line 24
+[27-May-2021 17:39:36 America/New_York] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: Invalid address:  (From): your-AwardSpace-email-goes-here in /home/powenzua/fortunestakeplus.com/src/PHPMailer.php:1256
+Stack trace:
+#0 /home/powenzua/fortunestakeplus.com/mail-script.php(27): PHPMailer\PHPMailer\PHPMailer->setFrom('your-AwardSpace...', 'Mailer')
+#1 {main}
+  thrown in /home/powenzua/fortunestakeplus.com/src/PHPMailer.php on line 1256
+[27-May-2021 18:15:48 America/New_York] PHP Notice:  Undefined index: messageemail in /home/powenzua/fortunestakeplus.com/mail-script.php on line 33
+[10-May-2024 21:07:51 UTC] PHP Warning:  require(../auth/src/Exception.php): failed to open stream: No such file or directory in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:07:51 UTC] PHP Warning:  require(../auth/src/Exception.php): failed to open stream: No such file or directory in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:07:51 UTC] PHP Fatal error:  require(): Failed opening required '../auth/src/Exception.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:07:55 UTC] PHP Warning:  require(../auth/src/Exception.php): failed to open stream: No such file or directory in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:07:55 UTC] PHP Warning:  require(../auth/src/Exception.php): failed to open stream: No such file or directory in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:07:55 UTC] PHP Fatal error:  require(): Failed opening required '../auth/src/Exception.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:08:00 UTC] PHP Warning:  require(../auth/src/Exception.php): failed to open stream: No such file or directory in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:08:00 UTC] PHP Warning:  require(../auth/src/Exception.php): failed to open stream: No such file or directory in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:08:00 UTC] PHP Fatal error:  require(): Failed opening required '../auth/src/Exception.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:08:19 UTC] PHP Warning:  require(../auth/src/Exception.php): failed to open stream: No such file or directory in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:08:19 UTC] PHP Warning:  require(../auth/src/Exception.php): failed to open stream: No such file or directory in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[10-May-2024 21:08:19 UTC] PHP Fatal error:  require(): Failed opening required '../auth/src/Exception.php' (include_path='.:/opt/alt/php74/usr/share/pear') in /home/cryptilo/public_html/degiantbackups.xyz/user/bundle/temp/short_mail.php on line 15
+[03-Aug-2024 05:23:47 UTC] PHP Notice:  Undefined variable: del in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 153
+[03-Aug-2024 05:24:07 UTC] PHP Notice:  Undefined variable: del in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 153
+[03-Aug-2024 05:24:09 UTC] PHP Notice:  Undefined variable: del in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 153
+[03-Aug-2024 05:24:32 UTC] PHP Notice:  Undefined index: loggedin in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 17
+[03-Aug-2024 05:32:18 UTC] PHP Notice:  Undefined index: email in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 10
+[03-Aug-2024 05:32:18 UTC] PHP Notice:  Undefined index: amount in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 11
+[03-Aug-2024 05:32:18 UTC] PHP Notice:  Undefined offset: 1 in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 15
+[03-Aug-2024 05:34:52 UTC] PHP Notice:  Undefined index: email in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 10
+[03-Aug-2024 05:34:52 UTC] PHP Notice:  Undefined index: amount in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 11
+[03-Aug-2024 05:34:52 UTC] PHP Notice:  Undefined offset: 1 in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 15
+[03-Aug-2024 05:35:08 UTC] PHP Notice:  Undefined index: email in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 10
+[03-Aug-2024 05:35:08 UTC] PHP Notice:  Undefined index: amount in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 11
+[03-Aug-2024 05:35:08 UTC] PHP Notice:  Undefined offset: 1 in /home/cryptilo/public_html/bitsmerchants.degiantbackups.xyz/user/admin/withdrawal_log/conf_withdrawal.php on line 15
