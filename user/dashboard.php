@@ -727,9 +727,9 @@ headerProfileAvatar.addEventListener("click", function(event) {
     <?php if(!empty($file)): ?>
     <script src="<?php echo $file; ?>"></script>
     <?php endif; ?>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js" integrity="sha256-JuxMxDPZWS9ep66F/1PfrxGX2YeliYg+6TSGT+b/xGaxOmQ=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha512-3gCbm7AzYhW+xhNN6EQeNE5r0Qa2bUyGJPD7W82dManIeZDV4SSQdlqzTeWY5Avzkdxl3pNGdisz8wjr3/x6iQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lHWgXPm9Y1w4vFvS+s8KekJy5o+1OtMQS8gkP7vGD18=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="<?php echo($js)?>translate.js"></script>
     <script>
         window.locales = window.locales || ['en'];
