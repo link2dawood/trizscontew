@@ -4,7 +4,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login");
     exit;
 }
-foreach (glob("../../db/config.php") as $config){include_once($config);};
+require_once __DIR__ . '/../../db/config.php';
 require '../../uniqid/uniqid.php';
 
 $userid = $_SESSION['id'];

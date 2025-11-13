@@ -1,6 +1,5 @@
 <?php
-                    // Include config file
-                    foreach (glob("bundle/db/config.php") as $config ){include_once $config;}
+                    require_once __DIR__ . '/../db/config.php';
                     
                     // Attempt select query execution
                     $sql = "SELECT * FROM deposit WHERE email='$sessionemail'";

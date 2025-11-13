@@ -6,10 +6,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // Include config file
-foreach (glob("bundle/db/config.php") as $config)
-{
-    include_once($config);
-}
+require_once __DIR__ . '/../db/config.php';
  
 // Define variables and initialize with empty values
 $email = $password = "";

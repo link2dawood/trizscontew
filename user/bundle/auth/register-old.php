@@ -1,9 +1,8 @@
 <?php
 session_start();
-foreach (glob("bundle/connect/platform.php") as $platform) {
-	include $platform;
-}
-foreach (glob("bundle/db/config.php") as $config){include_once($config);}
+
+require_once __DIR__ . '/../db/config.php';
+
 include_once('uniqid.php');
 
 $errors = array();

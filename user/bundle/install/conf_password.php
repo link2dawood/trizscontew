@@ -1,7 +1,7 @@
 <?php
 
 $input_password = $_POST['password'];
-foreach (glob("../db/config.php") as $config){include_once($config);}
+require_once __DIR__ . '/../db/config.php';
 /* Attempt to connect to MySQL database */
 $dbconnected = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  

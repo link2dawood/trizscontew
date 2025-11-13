@@ -3,7 +3,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login");
     exit;
 }
-foreach (glob("bundle/db/config.php") as $config){include_once($config);} 
+require_once __DIR__ . '/../db/config.php';
     
     $message_err ="";
 

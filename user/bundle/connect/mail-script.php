@@ -12,11 +12,11 @@
             require './src/PHPMailer.php';
             require './src/SMTP.php';
             
-            foreach (glob("../db/config.php") as $config){include_once($config);}
+            require_once __DIR__ . '/../db/config.php';
     
    function sendmail($myPersonalEmail, $subject, $msg) {
        
-      foreach (glob("../db/config.php") as $config){include_once($config);}
+      require_once __DIR__ . '/../db/config.php';
 
         $id = 1;
           // Prepare a select statement

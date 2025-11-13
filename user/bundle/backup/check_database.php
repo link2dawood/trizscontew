@@ -1,6 +1,6 @@
 <?php
+require_once __DIR__ . '/../db/config.php';
 
-foreach (glob("../db/config.php") as $config){include_once($config);}
 
 // Attempt select query execution
 $sql = "SELECT * FROM users";
@@ -254,7 +254,6 @@ mysqli_close($dbconnected);
       } else{
         echo "ERROR";
       }
-
 
 
         } else{

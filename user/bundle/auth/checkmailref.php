@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-foreach (glob("../db/config.php") as $config){include_once($config);}
+require_once __DIR__ . '/../db/config.php';
 // include_once('uniqid.php');
 
 $email = $_POST['email'];

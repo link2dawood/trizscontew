@@ -1,6 +1,14 @@
 <?php
-
-foreach (glob("../../db/config.php") as $config){include_once($config);}; 
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
+foreach (getallheaders() as $key => $value) {
+    if ($key == 'verif-hash') {
+        $userhash = $value;
+    }
+}
+require_once __DIR__ . '/../../db/config.php';
 
 $response = @file_get_contents('php://input');
 
