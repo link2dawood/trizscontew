@@ -1,6 +1,6 @@
 <?php
 
-foreach (glob("../db/config.php") as $config){include_once($config);}
+require_once __DIR__ . '/../db/config.php';
 
 // Attempt select query execution
 $sql = "SELECT * FROM platform";
@@ -23,3 +23,4 @@ if($result = mysqli_query($dbconnected, $sql)){
 
 // Close connection
 mysqli_close($dbconnected);
+?>

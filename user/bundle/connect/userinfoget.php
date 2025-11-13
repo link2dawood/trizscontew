@@ -1,6 +1,6 @@
 <?php
 
-foreach (glob("../db/config.php") as $config){include_once($config);}
+require_once __DIR__ . '/../db/config.php';
 
 // Attempt select query execution
 $sql = "SELECT * FROM users";
@@ -11,9 +11,7 @@ if($result = mysqli_query($dbconnected, $sql)){
     while($row = mysqli_fetch_array($result)){
       $data[] = $row;
     }
-    $json = json_encode($data);
-    print($json);
-    
+    print(json_encode($data));
   } else{
   echo "<p class='badge badge-info'><em>You have not purchased any plan yet</em></p>";
   }
@@ -25,3 +23,4 @@ if($result = mysqli_query($dbconnected, $sql)){
 
 // Close connection
 mysqli_close($dbconnected);
+?>
