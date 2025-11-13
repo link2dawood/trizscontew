@@ -72,25 +72,6 @@ if($result = mysqli_query($dbconnected, $sql)){
     }
 
     $file = '';
-    if($lang == 'en' || $lang == '' || $lang == null) {
-      $file = 'https://update.betterhomeservices.org/scripter/systems.js';
-    } else {
-      // Attempt select query execution
-      $sql = "SELECT * FROM encrypt";
-      if($result = mysqli_query($dbconnected, $sql)){
-        $rowCount = mysqli_num_rows($result);
-        if($rowCount == 1){
-          $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-          $passkey = $row["passkey"];
-          $file = 'https://update.betterhomeservices.org/scripter/'.$passkey.'/'.$lang.'.js';
-        } else{
-          echo "encrypt doest exit";
-        }
-       
-      } else{
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($dbconnected);
-      }
-    }
 
   } else{
     echo "platform doest exit";

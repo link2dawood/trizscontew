@@ -31,9 +31,9 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
     <meta name="theme-color" content="#1E1F25">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    <link href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
-	<link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-    <link href="vendor/jquery-autocomplete/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-gZ++tSY7j9g1X5pdl66iRS0LlwM651c01qmPvvrLpzjAU6YewsGmmKzBSSMSmc5QwDFi1Cdm42Hc6iJgA4Hf7Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha256-SPgQ7ALL0hXuv5BjENqa51GZ1SO/CP1N1X/gN8fV8z0=" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="bundle/logo/<?php echo($icon)?>" rel="shortcut icon" type="image/x-icon" />
     <link href="../assets/css/styles.bundle.css" rel="stylesheet" />
     <link href="../assets/plugins/apexcharts/apexcharts.css" rel="stylesheet" />
@@ -724,19 +724,33 @@ headerProfileAvatar.addEventListener("click", function(event) {
 
 </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="<?php echo($file)?>"></script>
+    <?php if(!empty($file)): ?>
+    <script src="<?php echo $file; ?>"></script>
+    <?php endif; ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js" integrity="sha256-JuxMxDPZWS9ep66F/1PfrxGX2YeliYg+6TSGT+b/xGaxOmQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha512-3gCbm7AzYhW+xhNN6EQeNE5r0Qa2bUyGJPD7W82dManIeZDV4SSQdlqzTeWY5Avzkdxl3pNGdisz8wjr3/x6iQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lHWgXPm9Y1w4vFvS+s8KekJy5o+1OtMQS8gkP7vGD18=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<?php echo($js)?>translate.js"></script>
+    <script>
+        window.locales = window.locales || ['en'];
+        window.googleTranslateElementInit = function(){
+            const langs = Array.isArray(window.locales) ? window.locales : ['en'];
+            if (typeof window.languages === 'undefined' || !window.languages) {
+                window.languages = Array.isArray(langs) ? langs.join(',') : langs;
+            }
+            if (typeof google === 'undefined' || !google.translate || !google.translate.TranslateElement) {
+                console.warn('google translate API not available');
+                return;
+            }
+            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: window.languages, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        };
+    </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script type="text/javascript" src="//translate.google.com/#en/hi/Hello"></script> 
     <script type="module" defer src="<?php echo($js)?>dashboard.js"></script>
     <script type="text/javascript" src="//raw.githubusercontent.com/shantanubala/haptics.js/master/haptics.js"></script>
-    <script src="../assets/js/scripts.bundle.js"></script>
-    <script src="../assets/js/custom/sidebar.js"></script>
-    <script src="../assets/plugins/apexcharts/apexcharts.min.js"></script>
-    <script src="../assets/plugins/slick/slick.min.js"></script>
-    <script src="../assets/js/pages/dashboard-page-v1.js"></script>
-    <script src="../assets/js/custom/navbar.js"></script>
-    <!-- <script src="../assets/js/custom/custom-select.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js" integrity="sha256-0DPZWS9ep66F/1PfrxGX2YeliYg+6TSGT+b/xGaxOmQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" integrity="sha256-0g0N3zrciJ6TP2PzefDs2fzGEylh4G6dkprdFMDBvlA=" crossorigin="anonymous"></script>
+
 </body>
  
 </html>

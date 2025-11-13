@@ -114,11 +114,22 @@ foreach (glob("bundle/login/login.php") as $login)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="<?php echo($js)?>translate_only.js"></script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script type="text/javascript" src="//translate.google.com/#en/hi/Hello"></script> 
     <script type="module" defer src="<?php echo($js)?>login/login.js"></script>
-    <script src="../assets/js/scripts.bundle.js"></script>
-    <script src="../assets/js/custom/sidebar.js"></script>
-    <script src="../assets/js/pages/sign-in-page.js"></script>
+    <script src="<?php echo($js)?>login/sign-in-page.js"></script>
+    <script>
+        window.locales = window.locales || ['en'];
+        window.googleTranslateElementInit = function(){
+            const langs = Array.isArray(window.locales) ? window.locales : ['en'];
+            if (typeof window.languages === 'undefined' || !window.languages) {
+                window.languages = Array.isArray(langs) ? langs.join(',') : langs;
+            }
+            if(typeof google === 'undefined' || !google.translate || !google.translate.TranslateElement){
+                console.warn('google translate API not available');
+                return;
+            }
+            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: window.languages, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        };
+    </script>
     <?php echo($l_chat)?>
 </body>
 

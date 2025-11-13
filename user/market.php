@@ -1245,18 +1245,17 @@ headerProfileAvatar.addEventListener("click", function(event) {
   event.stopPropagation();
 });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://checkout.flutterwave.com/v3.js"></script>
-    <script src="<?php echo($file)?>"></script>
+    <?php if(!empty($file)): ?>
+    <script src="<?php echo $file; ?>"></script>
+    <?php endif; ?>
     <script src="<?php echo($js)?>translate.js"></script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script type="text/javascript" src="//translate.google.com/#en/hi/Hello"></script> 
-    <script type="module" defer src="<?php echo($js)?>market/market.js"></script>
-    <script type="text/javascript" src="//raw.githubusercontent.com/shantanubala/haptics.js/master/haptics.js"></script>
-    <script src="../assets/js/scripts.bundle.js"></script>
-    <script src="../assets/js/custom/sidebar.js"></script>
-    <script src="../assets/plugins/apexcharts/apexcharts.min.js"></script>
-    <script src="../assets/js/pages/market-page-v1.js"></script>
-    <script src="../assets/js/custom/navbar.js"></script>
+     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js" integrity="sha256-0DPZWS9ep66F/1PfrxGX2YeliYg+6TSGT+b/xGaxOmQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" integrity="sha256-0g0N3zrciJ6TP2PzefDs2fzGEylh4G6dkprdFMDBvlA=" crossorigin="anonymous"></script>
+     <script type="module" defer src="<?php echo($js)?>market/market.js"></script>
+     <script type="text/javascript" src="//raw.githubusercontent.com/shantanubala/haptics.js/master/haptics.js"></script>
 </body>
 
 

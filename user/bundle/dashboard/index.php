@@ -30,7 +30,12 @@ require_once __DIR__ . '/../db/config.php';
                 // Check database if data exit and store the count in a variable.
                 $rowCount = mysqli_num_rows($result); 
                 if( $rowCount === 0){
+                    $_SESSION = [];
+                    if(session_status() === PHP_SESSION_ACTIVE){
+                        session_destroy();
+                    }
                     header('location: login');
+                    exit;
 
                 } else if($rowCount == 1){
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
