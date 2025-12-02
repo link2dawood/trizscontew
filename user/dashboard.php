@@ -32,13 +32,14 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-gZ++tSY7j9g1X5pdl66iRS0LlwM651c01qmPvvrLpzjAU6YewsGmmKzBSSMSmc5QwDFi1Cdm42Hc6iJgA4Hf7Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha256-SPgQ7ALL0hXuv5BjENqa51GZ1SO/CP1N1X/gN8fV8z0=" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css" crossorigin="anonymous" />
     <link href="bundle/logo/<?php echo($icon)?>" rel="shortcut icon" type="image/x-icon" />
     <link href="../assets/css/styles.bundle.css" rel="stylesheet" />
     <link href="../assets/plugins/apexcharts/apexcharts.css" rel="stylesheet" />
     <link href="../assets/css/pages/dashboard-v1.css" rel="stylesheet" />
     <link href="<?php echo($style)?>" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <style>
         .graph-area {
             margin-right: .4rem;
@@ -672,9 +673,10 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
         <div class="flutterwave-pass hido"><?php echo($flutterwave)?></div>
         <div class="coingate-pass hido"><?php echo($coingate)?></div>
     </div>
-    
+
     <script>
-		$(document).ready(function () {
+	// jQuery loaded in head, so $ is now available
+	$(document).ready(function () {
   $(".control").click(function () {
     var spinner = $(this).closest("div").find("div[class*='spinner-']");
     $(spinner).toggleClass("stop");
@@ -723,7 +725,6 @@ headerProfileAvatar.addEventListener("click", function(event) {
 });
 
 </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <?php if(!empty($file)): ?>
     <script src="<?php echo $file; ?>"></script>
     <?php endif; ?>
@@ -746,10 +747,10 @@ headerProfileAvatar.addEventListener("click", function(event) {
         };
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script type="module" defer src="<?php echo($js)?>dashboard.js"></script>
+    <script type="module" defer src="<?php echo($js)?>dashboard.js?v=<?php echo time(); ?>"></script>
     <script type="text/javascript" src="//raw.githubusercontent.com/shantanubala/haptics.js/master/haptics.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js" integrity="sha256-0DPZWS9ep66F/1PfrxGX2YeliYg+6TSGT+b/xGaxOmQ=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" integrity="sha256-0g0N3zrciJ6TP2PzefDs2fzGEylh4G6dkprdFMDBvlA=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js?v=<?php echo time(); ?>" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js?v=<?php echo time(); ?>" crossorigin="anonymous"></script>
 
 </body>
  

@@ -17,18 +17,22 @@ if($result = mysqli_query($dbconnected, $sql)){
     $data = $row["data"];
     $script = $row["script"];
     $hostname = getenv('HTTP_HOST');
+
+  // Detect protocol (HTTP or HTTPS)
+  $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
   $style = '';
   $image = '';
   $js = '';
   if($name === 'Cryptilo Blue' || $name === 'My Custom' || $name === 'MGM Base' || $name === 'Horizon' || $name === 'Refresh') {
-    $style = 'https://'.$hostname.'/user/themes/'.$data;
-    $image = 'https://'.$hostname.'/user/themes/'.$img;
-    $js = 'https://'.$hostname.'/user/'.$script.'/';
+    $style = $protocol.$hostname.'/others/trizscontew/user/themes/'.$data;
+    $image = $protocol.$hostname.'/others/trizscontew/user/themes/'.$img;
+    $js = $protocol.$hostname.'/others/trizscontew/user/'.$script.'/';
   } else {
     $style = $data;
     $image = $img;
     if(substr($script, 0, 5) == 'AppSc' || substr($script, 0, 5) == 'Appsc') {
-      $js = 'https://'.$hostname.'/user/'.$script.'/';
+      $js = $protocol.$hostname.'/others/trizscontew/user/'.$script.'/';
     } else {
       $js = $script;
     }

@@ -72,6 +72,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
                                     $email = $row['email'];
                                     $amount = $row['amount'];
                                     $payment_mode = $row['payment_mode'];
+                                    $payment_mode_clean = explode(' ', trim($payment_mode))[0];
                                     $status = $row['status'];
                                     $proof = $row['upload'];
                                     $date = $row['date_created'];
@@ -81,7 +82,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
                                          <tr data-row-id="56">
                                           <td><a href="#" data-toggle="modal" data-target="#responsive-modalUser56'.$index.'" title="click to view details">'.$email.'</a></td>
                                            <td>$'.$amount.'</td>
-                                           <td>'.$payment_mode.'</td>
+                                           <td>'.$payment_mode_clean.'</td>
                                            <td style="color: #8F3739"><span
                                                 style="background:#00b33c;color: #FFF;padding: 3px 5px;border-radius:5px;">'.$status.'</span>
                                             </td>
@@ -96,9 +97,9 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
                                                     
                                                   </a>
                                                   <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="deposit_log/conf_deposit?status=Approved&&id='.$id.'&&amount='.$payment_mode.'&&email='.$email.'"> <span class="iconify nav__icon"
+                                                    <a class="dropdown-item" href="deposit_log/conf_deposit?status=Approved&&id='.$id.'&&amount='.$payment_mode_clean.' '.$amount.'&&email='.$email.'"> <span class="iconify nav__icon"
                                                         data-icon="mdi-cash-check"></span>Approve request</a>
-                                                    <a class="dropdown-item" href="deposit_log/conf_deposit?status=Declined&&id='.$id.'&&amount='.$payment_mode.'&&email='.$email.'""> <span class="iconify nav__icon"
+                                                    <a class="dropdown-item" href="deposit_log/conf_deposit?status=Declined&&id='.$id.'&&amount='.$payment_mode_clean.' '.$amount.'&&email='.$email.'""> <span class="iconify nav__icon"
                                                         data-icon="mdi-cash-remove"></span>Decline request</a>
                                                     <a class="dropdown-item" href="deposit_log/delete_deposit?id='.$id.'"> <span class="iconify nav__icon" data-icon="mdi-delete"></span>Delete</a>
                                                   </div>

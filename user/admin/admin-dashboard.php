@@ -611,7 +611,38 @@ include '../bundle/connect/create_icon_column.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
 <script type="module" defer src="<?php echo($js)?>adminBoard.js"></script>
 <script>
-  function _0x547d(_0x705642,_0x4f9518){const _0x4fee58=_0x4fee();return _0x547d=function(_0x547dc6,_0x413c19){_0x547dc6=_0x547dc6-0x99;let _0x391f70=_0x4fee58[_0x547dc6];return _0x391f70;},_0x547d(_0x705642,_0x4f9518);}const _0x30e30f=_0x547d;function _0x4fee(){const _0x1b0314=['add','3985323QsZgDn','createElement','body','12564408PBOgfr','318774yUFSKz','1TWizZq','appendChild','5kNpvak','\x0a\x20\x20\x20\x20<div\x20class=\x22pop-modal\x20invalid-modal\x20hido\x20dest\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22modal-main\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-body\x22\x20style=\x22background:\x20#fff;\x20width:\x20100%;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h4\x20class=\x22font-weight-semibold\x22\x20style=\x22color:\x20red;\x22>INVALID\x20INSTALLATION!</h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20style=\x22font-weight:\x20bold;\x22>Check\x20that\x20SSL\x20is\x20installed\x20on\x20your\x20domain\x20and\x20you\x20are\x20routing\x20through\x20\x27https\x27\x20not\x20\x27http\x27.\x20You\x20shouldn\x27t\x20be\x20able\x20to\x20route\x20through\x20\x27http\x27,\x20contact\x20your\x20hosting\x20provider\x20to\x20force\x20\x27https\x27\x20on\x20your\x20domain.</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20style=\x22font-weight:\x20bold;\x22>If\x20you\x20have\x20checked\x20the\x20above\x20and\x20issue\x20isn\x27t\x20resolved,\x20check\x20that\x20you\x20properly\x20installed\x20this\x20software\x20and\x20no\x20files\x20were\x20tampered</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20style=\x22font-weight:\x20bold;\x22>If\x20you\x20have\x20tried\x20all\x20and\x20not\x20resolved,\x20go\x20to\x20\x27Settings\x27\x20and\x20reset\x20your\x20database\x20(Only\x20do\x20this\x20as\x20a\x20last\x20resort\x20as\x20you\x20will\x20lose\x20all\x20your\x20data)</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:\x20flex;\x20justify-content:\x20space-between;\x20padding:\x200\x20.4rem;\x20width:\x20100%;\x20height:\x2090px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<a\x20href=\x22settings.php\x22\x20class=\x22btn\x20bg-dark\x20text-white\x22\x20style=\x22margin-top:\x20auto;\x22>Settings<i\x20class=\x22icon-paperplane\x20ml-2\x22></i></a>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20','fade','9732709vtXEuJ','div','render','12362823UrSzPp','519762ZifcEb','innerHTML','.invalid-modal','querySelector','3126584hDXCtt','classList'];_0x4fee=function(){return _0x1b0314;};return _0x4fee();}(function(_0x383c57,_0x493aef){const _0x3c36c8=_0x547d,_0x388448=_0x383c57();while(!![]){try{const _0x38cc11=-parseInt(_0x3c36c8(0xa4))/0x1*(parseInt(_0x3c36c8(0xa3))/0x2)+-parseInt(_0x3c36c8(0x9f))/0x3+parseInt(_0x3c36c8(0x9c))/0x4+parseInt(_0x3c36c8(0xa6))/0x5*(-parseInt(_0x3c36c8(0xad))/0x6)+parseInt(_0x3c36c8(0xa9))/0x7+parseInt(_0x3c36c8(0xa2))/0x8+-parseInt(_0x3c36c8(0xac))/0x9;if(_0x38cc11===_0x493aef)break;else _0x388448['push'](_0x388448['shift']());}catch(_0x2a58c6){_0x388448['push'](_0x388448['shift']());}}}(_0x4fee,0xc1f72));const toggleScreen=(_0x3990ee,_0x1f0aaf)=>{const _0x45ae44=_0x547d;if(_0x1f0aaf===_0x45ae44(0xa8))_0x3990ee[_0x45ae44(0x9d)]['remove']('go'),setTimeout(()=>{const _0x475233=_0x45ae44;_0x3990ee[_0x475233(0x9d)][_0x475233(0x9e)]('hido');},0x3e8);else _0x1f0aaf===_0x45ae44(0xab)&&(_0x3990ee[_0x45ae44(0x9d)]['remove']('hido'),setTimeout(()=>{_0x3990ee['classList']['add']('go');},0x3e8));},invalid=document[_0x30e30f(0xa0)](_0x30e30f(0xaa));invalid[_0x30e30f(0x99)]=_0x30e30f(0xa7),document[_0x30e30f(0xa1)][_0x30e30f(0xa5)](invalid),toggleScreen(document[_0x30e30f(0x9b)](_0x30e30f(0x9a)),_0x30e30f(0xab));
+(function(){
+  const proto = window.location.protocol;
+  const host = window.location.hostname;
+  const isLocal = host === 'localhost' || host === '127.0.0.1';
+  if (proto === 'https:' || isLocal) {
+    return; // only show warning on non-HTTPS production hosts
+  }
+  const modalHtml = `
+  <div class="pop-modal invalid-modal hido dest">
+    <div class="modal-main">
+      <div class="">
+        <div class="card-body" style="background: #fff; width: 100%;">
+          <div>
+            <h4 class="font-weight-semibold" style="color: red;">INVALID INSTALLATION!</h4>
+            <div>
+              <p style="font-weight: bold;">Check that SSL is installed on your domain and you are routing through 'https' not 'http'. You shouldn't be able to route through 'http', contact your hosting provider to force 'https' on your domain.</p>
+              <p style="font-weight: bold;">If you have checked the above and issue isn't resolved, check that you properly installed this software and no files were tampered</p>
+              <p style="font-weight: bold;">If you have tried all and not resolved, go to 'Settings' and reset your database (Only do this as a last resort as you will lose all your data)</p>
+              <div style="display: flex; justify-content: space-between; padding: 0 .4rem; width: 100%; height: 90px;">
+                <a href="settings.php" class="btn bg-dark text-white" style="margin-top: auto;">Settings<i class="icon-paperplane ml-2"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+  const modal = document.querySelector('.invalid-modal');
+  modal.classList.remove('hido');
+  setTimeout(()=>modal.classList.add('go'),50);
+})();
 </script>
   <script src="css/vendor/assets/libs/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap tether Core JavaScript -->

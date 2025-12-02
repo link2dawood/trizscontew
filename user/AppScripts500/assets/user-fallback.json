@@ -1,0 +1,26 @@
+[
+  {
+    "email": "demo@example.com",
+    "fname": "Demo",
+    "lname": "User",
+    "country": "US",
+    "crypto_btc": "0.30887",
+    "crypto_eth": "0.063",
+    "crypto_usdt": "1500",
+    "crypto_bnb": "5",
+    "withbtcBal": "0",
+    "balance": "0",
+    "bonus": "0",
+    "deposit": "",
+    "ref_code": "",
+    "refered_by": "",
+    "password": "****",
+    "phone": "",
+    "ip_addr": "USD",
+    "profit": "",
+    "verif_status": "Pending",
+    "verif_complete": "no",
+    "otp_2fa": "no",
+    "user_id": "1"
+  }
+]

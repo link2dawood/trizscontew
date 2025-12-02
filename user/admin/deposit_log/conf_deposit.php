@@ -7,17 +7,45 @@ require '../../bundle/temp/short_mail2.php';
 
   $status = trim($_GET['status']);
   $id = trim($_GET['id']);
-  $email = trim($_GET['email']);
-  $amount = trim($_GET['amount']);
-  $delimeter = ' ';
-  $words = explode($delimeter, $amount);
-  $coin = $words[0];
-  $value_raw = $words[1];   
+
+  // Fetch the deposit details directly by id to avoid relying on query params.
+  $depositSql = "SELECT email, amount, payment_mode FROM deposit WHERE id = ?";
+  $depositStmt = mysqli_stmt_init($dbconnected);
+  $email = '';
+  $coin = '';
+  $value_raw = 0.0;
+  $amount_display = '';
+
+  if($depositStmt = mysqli_prepare($dbconnected, $depositSql)){
+    mysqli_stmt_bind_param($depositStmt, "i", $id);
+    if(mysqli_stmt_execute($depositStmt)){
+      $depositResult = mysqli_stmt_get_result($depositStmt);
+      if(mysqli_num_rows($depositResult) === 1){
+        $depositRow = mysqli_fetch_array($depositResult, MYSQLI_ASSOC);
+        $email = trim($depositRow['email']);
+        $coinRaw = strtoupper(trim($depositRow['payment_mode']));
+        $coinParts = preg_split('/\s+/', $coinRaw);
+        $coin = isset($coinParts[0]) ? $coinParts[0] : '';
+        $value_raw = is_numeric($depositRow['amount']) ? (float)$depositRow['amount'] : 0.0;
+        $amount_display = $coin . ' ' . number_format($value_raw, 5, '.', '');
+      }
+    }
+    mysqli_stmt_close($depositStmt);
+  }
         
 
 if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){  
 
-  if (!empty(isset($_GET['status'])) && !empty(isset($_GET['id']))) {
+  if (!empty($status) && !empty($id)) {
+
+    // Guard against missing/invalid deposit data.
+    if ($email === '' || $coin === '' || $value_raw <= 0) {
+      $_SESSION['status'] = "error";
+      $_SESSION['title'] = "Error";
+      $_SESSION['message'] = "Deposit details not found or invalid for this request.";
+      echo "<script>window.open('../deposits-logs', '_self')</script>";
+      exit();
+    }
 
 
   $sql = "SELECT * FROM users WHERE email = ?";
@@ -43,22 +71,30 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
               $eth = $row['crypto_eth'];
               $usdt = $row['crypto_usdt'];
               $bnb = $row['crypto_bnb'];
+              $user_deposit = $row['deposit'];
 
     $asset = '';
     $value = '';
     if($coin == 'BTC') {
       $asset = 'crypto_btc';
-      $value = $value_raw + $btc;
+      $value = (float)$value_raw + (float)$btc;
     } elseif($coin == 'ETH') {
       $asset = 'crypto_eth';
-      $value = $value_raw + $eth;
+      $value = (float)$value_raw + (float)$eth;
     } elseif($coin == 'USDT') {
       $asset = 'crypto_usdt';
-      $value = $value_raw + $usdt;
+      $value = (float)$value_raw + (float)$usdt;
     } elseif($coin == 'BNB') {
       $asset = 'crypto_bnb';
-      $value = $value_raw + $bnb;
+      $value = (float)$value_raw + (float)$bnb;
+    } else {
+      $_SESSION['status'] = "error";
+      $_SESSION['title'] = "Error";
+      $_SESSION['message'] = "Unsupported coin type for this deposit.";
+      echo "<script>window.open('../deposits-logs', '_self')</script>";
+      exit();
     }
+    $new_deposit_total = (float)$value_raw + (float)$user_deposit;
 
 
 
@@ -74,13 +110,13 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
              
              // Attempt to execute the prepared statement
              if(mysqli_stmt_execute($stmt)){
-               $sql = "UPDATE users SET $asset=? WHERE email=?";
+               $sql = "UPDATE users SET $asset=?, deposit=? WHERE email=?";
                $stmt = mysqli_stmt_init($dbconnected);
  
                if($stmt = mysqli_prepare($dbconnected, $sql)){
  
                  // Bind variables to the prepared statement as parameters
-                 mysqli_stmt_bind_param($stmt, "ss", $value, $email);
+                 mysqli_stmt_bind_param($stmt, "dds", $value, $new_deposit_total, $email);
  
                // Attempt to execute the prepared statement   
                  if(mysqli_stmt_execute($stmt)){
@@ -88,12 +124,12 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
                   
                   $type = 'admin';
                   $admin_subject = 'Deposit successfully approved';
-                  $admin_msg = 'You approved a deposited of '.$amount.' on account: '.$email;
+                  $admin_msg = 'You approved a deposited of '.$amount_display.' on account: '.$email;
           
                   $myPersonalEmail = $email;
                   $subject = 'Deposit successful';
-                  $meta = 'Your deposit of '.$amount.' has been approved';
-                  $msg = 'Your deposit of '.$amount.' has been approved';
+                  $meta = 'Your deposit of '.$amount_display.' has been approved';
+                  $msg = 'Your deposit of '.$amount_display.' has been approved';
                   send_short_mail($myPersonalEmail, $subject, $msg, $meta, $admin_subject, $admin_msg, $type, $dbconnected);
 
 

@@ -1,0 +1,86 @@
+{
+  "data": {
+    "info": "",
+    "url": "#",
+    "announcement": [],
+    "cryptoData": [
+      {
+        "coincode": "BTC",
+        "coin": "Bitcoin",
+        "price": "$67432.12",
+        "change1hr": "+0.42%",
+        "marketCap": "$1280000000000",
+        "coinimage": "",
+        "changePos": 1,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "ETH",
+        "coin": "Ethereum",
+        "price": "$3521.44",
+        "change1hr": "-0.15%",
+        "marketCap": "$422000000000",
+        "coinimage": "",
+        "changePos": 0,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "USDT",
+        "coin": "Tether",
+        "price": "$1.00",
+        "change1hr": "+0.00%",
+        "marketCap": "$110000000000",
+        "coinimage": "",
+        "changePos": 0,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "BNB",
+        "coin": "BNB",
+        "price": "$590.12",
+        "change1hr": "+0.25%",
+        "marketCap": "$91000000000",
+        "coinimage": "",
+        "changePos": 1,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "EUR",
+        "coin": "Euro",
+        "price": "$1.08",
+        "change1hr": "+0.00%",
+        "marketCap": "$0",
+        "coinimage": "",
+        "changePos": 0,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "YEN",
+        "coin": "Yen",
+        "price": "$0.0065",
+        "change1hr": "+0.00%",
+        "marketCap": "$0",
+        "coinimage": "",
+        "changePos": 0,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "Info",
+        "coin": "Info",
+        "price": "$0.00",
+        "change1hr": "+0.00%",
+        "marketCap": "$0",
+        "coinimage": "",
+        "changePos": 0,
+        "graph7Days": [],
+        "dataPoints": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "data": {
+    "cryptoData": [
+      {
+        "coincode": "EUR",
+        "coin": "Euro",
+        "price": "$1.10",
+        "change1hr": "+0.01%",
+        "marketCap": "$0",
+        "coinimage": "",
+        "changePos": 1,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "YEN",
+        "coin": "Yen",
+        "price": "$0.0067",
+        "change1hr": "+0.00%",
+        "marketCap": "$0",
+        "coinimage": "",
+        "changePos": 1,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "Info",
+        "coin": "Info",
+        "price": "$0",
+        "change1hr": "0%",
+        "marketCap": "$0",
+        "coinimage": "",
+        "changePos": 0,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "BTC",
+        "coin": "Bitcoin",
+        "price": "$60000",
+        "change1hr": "+1.2%",
+        "marketCap": "$1000000000",
+        "coinimage": "",
+        "changePos": 1,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "ETH",
+        "coin": "Ethereum",
+        "price": "$3000",
+        "change1hr": "+1.0%",
+        "marketCap": "$500000000",
+        "coinimage": "",
+        "changePos": 1,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "USDT",
+        "coin": "Tether",
+        "price": "$1",
+        "change1hr": "+0.0%",
+        "marketCap": "$100000000",
+        "coinimage": "",
+        "changePos": 1,
+        "graph7Days": [],
+        "dataPoints": []
+      },
+      {
+        "coincode": "BNB",
+        "coin": "BNB",
+        "price": "$400",
+        "change1hr": "+0.5%",
+        "marketCap": "$100000000",
+        "coinimage": "",
+        "changePos": 1,
+        "graph7Days": [],
+        "dataPoints": []
+      }
+    ]
+  }
+}

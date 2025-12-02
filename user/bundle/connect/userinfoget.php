@@ -1,26 +1,22 @@
 <?php
-
+header('Content-Type: application/json');
 require_once __DIR__ . '/../db/config.php';
 
-// Attempt select query execution
 $sql = "SELECT * FROM users";
-if($result = mysqli_query($dbconnected, $sql)){
-  $rowCount = mysqli_num_rows($result);
-  if($rowCount > 0){
-    $data = array();
-    while($row = mysqli_fetch_array($result)){
-      $data[] = $row;
-    }
-    print(json_encode($data));
-  } else{
-  echo "<p class='badge badge-info'><em>You have not purchased any plan yet</em></p>";
-  }
- 
-} else{
-  echo "ERROR: Could not able to execute $sql. " . mysqli_error($dbconnected);
+$result = mysqli_query($dbconnected, $sql);
+
+if ($result === false) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Query failed', 'detail' => mysqli_error($dbconnected)]);
+    mysqli_close($dbconnected);
+    exit;
 }
 
+$data = [];
+while ($row = mysqli_fetch_array($result)) {
+    $data[] = $row;
+}
 
-// Close connection
+echo json_encode($data);
 mysqli_close($dbconnected);
 ?>
