@@ -71,6 +71,115 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
             color: #F7F7F7;
         }
 
+        /* Carousel horizontal layout fix */
+        .assets__carousel {
+            position: relative;
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1.5rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            padding-bottom: 1rem;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .assets__carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .assets__carousel .assets__item {
+            flex: 0 0 auto;
+            width: 346px;
+            max-width: 346px;
+            min-width: 280px;
+        }
+
+        /* Carousel arrows restyle */
+        .assets__carousel {
+            position: relative;
+        }
+        /* .assets-carousel__arrows {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        } */
+        /* .assets-carousel__arrows a {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            transition: transform .15s ease, background .15s ease, border-color .15s ease;
+        }
+        .assets-carousel__arrows a:hover {
+            transform: translateY(-1px);
+            background: rgba(111,134,255,0.15);
+            border-color: rgba(111,134,255,0.4);
+        }
+        .assets-carousel__arrows img {
+            width: 16px;
+            height: 16px;
+        }
+        .slick__pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+        }
+        .assets-carousel__pagination {
+            display: flex;
+            align-items: center;
+        } */
+        .dashboard .assets .slick__pagination .assets-carousel__arrows {
+            top: 78px !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1199.98px) {
+            .assets__carousel {
+                gap: 1rem;
+            }
+            .assets__carousel .assets__item {
+                width: 300px;
+                max-width: 300px;
+                min-width: 260px;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .assets__carousel {
+                gap: 0.75rem;
+            }
+            .assets__carousel .assets__item {
+                width: 280px;
+                max-width: 280px;
+                min-width: 240px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .assets__carousel {
+                gap: 0.5rem;
+            }
+            .assets__carousel .assets__item {
+                width: 260px;
+                max-width: 260px;
+                min-width: 220px;
+            }
+        }
+
     </style>
 </head>
 
@@ -722,6 +831,57 @@ headerProfileAvatar.addEventListener("click", function(event) {
   headerProfileDropdown.classList.toggle("active");
   headerProfileDropdownArrow.classList.toggle("active");
   event.stopPropagation();
+});
+
+// Carousel scroll functionality
+document.addEventListener("DOMContentLoaded", function() {
+    const carousel = document.querySelector('.assets__carousel');
+    const prevBtn = document.querySelector('.assets-carousel__prev');
+    const nextBtn = document.querySelector('.assets-carousel__next');
+
+    if (carousel && prevBtn && nextBtn) {
+        const scrollAmount = 346 + 24; // card width + gap
+
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            carousel.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            carousel.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        });
+
+        // Optional: Hide prev/next buttons when at start/end
+        function updateArrowsVisibility() {
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+            if (carousel.scrollLeft <= 0) {
+                prevBtn.style.opacity = '0.4';
+                prevBtn.style.pointerEvents = 'none';
+            } else {
+                prevBtn.style.opacity = '1';
+                prevBtn.style.pointerEvents = 'auto';
+            }
+
+            if (carousel.scrollLeft >= maxScroll - 1) {
+                nextBtn.style.opacity = '0.4';
+                nextBtn.style.pointerEvents = 'none';
+            } else {
+                nextBtn.style.opacity = '1';
+                nextBtn.style.pointerEvents = 'auto';
+            }
+        }
+
+        carousel.addEventListener('scroll', updateArrowsVisibility);
+        updateArrowsVisibility(); // Initial check
+    }
 });
 
 </script>
