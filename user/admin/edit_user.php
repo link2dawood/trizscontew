@@ -28,7 +28,6 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
   <link href="css/vendor/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
   <link href="css/vendor/dist/css/style.min.css" rel="stylesheet" />
   <script src="//code.iconify.design/1/1.0.6/iconify.min.js"></script>
-  <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
   <link rel="stylesheet" href="css/main.css">
   <script src="css/vendor/assets/libs/jquery/dist/jquery.min.js"></script>
 
@@ -150,15 +149,15 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
             <li class="nav-item dropdown dropdown-user mr-3 mt-1">
               <a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
                 <span class="d-inline-block pt-1">Admin </span>
-                <ion-icon name="chevron-down-outline" class="d-inline-block pt-1"></ion-icon>
+                <span class="iconify" data-icon="mdi:chevron-down" class="d-inline-block pt-1"></span>
               </a>
 
               <div class="dropdown-menu dropdown-menu-right">
                 <a href="#" class="dropdown-item">
-                  <ion-icon name="lock-closed-outline"></ion-icon> Account information
+                  <span class="iconify" data-icon="mdi:lock-outline"></span> Account information
                 </a>
                 <a href="logout" class="dropdown-item">
-                  <ion-icon name="power-outline"></ion-icon> Logout
+                  <span class="iconify" data-icon="mdi:power"></span> Logout
                 </a>
               </div>
             </li>
@@ -193,21 +192,21 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
             <li class="sidebar-item" id="dashboard__menu">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="admin-dashboard"
                 aria-expanded="false">
-                <ion-icon name="grid" class="nav__icon"></ion-icon><span class="hide-menu">Dashboard</span>
+                <span class="iconify" data-icon="mdi:view-grid" class="nav__icon"></span><span class="hide-menu">Dashboard</span>
               </a>
             </li>
 
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="setup"
                 aria-expanded="false">
-                <ion-icon name="build" class="nav__icon"></ion-icon><span class="hide-menu">Setup</span>
+                <span class="iconify" data-icon="mdi:wrench" class="nav__icon"></span><span class="hide-menu">Setup</span>
               </a>
             </li>
 
             <li class="sidebar-item" id="dashboard__menu">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="registered-users"
                 aria-expanded="false">
-                <ion-icon name="people-circle" class="nav__icon"></ion-icon><span class="hide-menu">Registered Users</span>
+                <span class="iconify" data-icon="mdi:account-circle" class="nav__icon"></span><span class="hide-menu">Registered Users</span>
               </a>
             </li>
 
@@ -216,21 +215,21 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="verification"
                 aria-expanded="false">
-                <ion-icon name="finger-print" class="nav__icon"></ion-icon><span class="hide-menu">Verification
+                <span class="iconify" data-icon="mdi:fingerprint" class="nav__icon"></span><span class="hide-menu">Verification
                   </span>
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="referral-earnings"
                 aria-expanded="false">
-                <ion-icon name="git-merge" class="nav__icon"></ion-icon><span class="hide-menu">Referral Earnings
+                <span class="iconify" data-icon="mdi:source-merge" class="nav__icon"></span><span class="hide-menu">Referral Earnings
                   </span>
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="buy-sell"
                 aria-expanded="false">
-                <ion-icon name="bar-chart" class="nav__icon"></ion-icon><span class="hide-menu">Buy/Sell
+                <span class="iconify" data-icon="mdi:chart-bar" class="nav__icon"></span><span class="hide-menu">Buy/Sell
                   </span>
               </a>
             </li>
@@ -308,7 +307,7 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="loan"
                 aria-expanded="false">
-                <ion-icon name="server" class="nav__icon"></ion-icon><span class="hide-menu">Loan
+                <span class="iconify" data-icon="mdi:server" class="nav__icon"></span><span class="hide-menu">Loan
                   </span>
               </a>
             </li>
@@ -322,28 +321,28 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="mailing"
                 aria-expanded="false">
-                <ion-icon name="mail" class="nav__icon"></ion-icon><span class="hide-menu">Mailing
+                <span class="iconify" data-icon="mdi:email" class="nav__icon"></span><span class="hide-menu">Mailing
                   </span>
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="smtp"
                 aria-expanded="false">
-                <ion-icon name="mail-open" class="nav__icon"></ion-icon><span class="hide-menu">SMTP Settings
+                <span class="iconify" data-icon="mdi:email-open-outline" class="nav__icon"></span><span class="hide-menu">SMTP Settings
                   </span>
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="backup"
                 aria-expanded="false">
-                <ion-icon name="cloud-download" class="nav__icon"></ion-icon><span class="hide-menu">Backup/Restore
+                <span class="iconify" data-icon="mdi:cloud-download" class="nav__icon"></span><span class="hide-menu">Backup/Restore
                   </span>
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="themes"
                 aria-expanded="false">
-                <ion-icon name="contrast" class="nav__icon"></ion-icon><span class="hide-menu">Themes
+                <span class="iconify" data-icon="mdi:theme-light-dark" class="nav__icon"></span><span class="hide-menu">Themes
                   </span>
               </a>
             </li>
@@ -353,21 +352,21 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="admin-account"
                 aria-expanded="false">
-                <ion-icon name="person-circle" class="nav__icon"></ion-icon><span class="hide-menu">Account</span>
+                <span class="iconify" data-icon="mdi:account-circle" class="nav__icon"></span><span class="hide-menu">Account</span>
               </a>
             </li>
 
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="settings"
                 aria-expanded="false">
-                <ion-icon name="settings-sharp" class="nav__icon"></ion-icon><span class="hide-menu">Settings</span>
+                <span class="iconify" data-icon="mdi:cog" class="nav__icon"></span><span class="hide-menu">Settings</span>
               </a>
             </li>
 
             <li class="sidebar-item">
               <a class="sidebar-link waves-effect waves-dark sidebar-link nav__link" href="logout"
                 aria-expanded="false">
-                <ion-icon name="power" class="nav__icon"></ion-icon><span class="hide-menu">Logout</span>
+                <span class="iconify" data-icon="mdi:power" class="nav__icon"></span><span class="hide-menu">Logout</span>
               </a>
             </li>
           </ul>
@@ -567,9 +566,14 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
                                   <!-- Real start -->
 
                                   <br>
-                                  <h4>Total Balance: $<span id="total-cont">....</span></h4>
-                                  
-                                  <br>
+                                  <div style="background: #1B65F2; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <h3 style="color: #fff; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                      Total Balance: <span style="font-size: 2rem; font-weight: bold;">$<span id="total-cont">Loading...</span></span>
+                                    </h3>
+                                    <p style="color: #fff; margin: 0.5rem 0 0 0; opacity: 0.9;">Combined balance across all wallets (USD equivalent)</p>
+                                  </div>
+
                                   <h5 style="color: red;">To top up a user's balance, The user should make a deposit to any of their wallets. Once you approve the deposit, their wallet gets funded.</h5>
                                   <p class="timeout-info">Timeout for a deposit is 15 minutes, you should confirm and approve the deposit within this timeframe (only approve once you confirm transaction)</p>
                                   <div id="assets-tab"></div>
@@ -678,6 +682,282 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
   <script src="css/vendor/assets/libs/toastr/build/toastr.min.js"></script>
   <script src="css/vendor/assets/extra-libs/toastr/toastr-init.js"></script>
   <script src="js/app.js"></script>
+
+  <!-- Load User Balance -->
+  <script>
+  // Use setTimeout to ensure this runs after adminUser.js module loads
+  setTimeout(function() {
+      var userEmail = $('#user-email').val();
+      var cryptoButtons = {}; // Store crypto button references
+
+      function loadUserBalance() {
+          $.ajax({
+              url: '../bundle/connect/userbalanceget.php',
+              type: 'POST',
+              data: { email: userEmail },
+              dataType: 'json',
+              success: function(data) {
+                  if (data.success && data.totalBalance) {
+                      var totalBalance = parseFloat(data.totalBalance);
+                      var formattedBalance = totalBalance.toLocaleString('en-US', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2
+                      });
+
+                      // Update total balance display
+                      $('#total-cont').text(formattedBalance);
+
+                      // Update individual crypto balances if elements exist
+                      if (data.balances) {
+                          // BTC
+                          if (data.balances.btc) {
+                              $('#btc-crypto').val(data.balances.btc.crypto);
+                              $('#btc-usd').val('$' + parseFloat(data.balances.btc.usd).toFixed(2));
+                          }
+                          // ETH
+                          if (data.balances.eth) {
+                              $('#eth-crypto').val(data.balances.eth.crypto);
+                              $('#eth-usd').val('$' + parseFloat(data.balances.eth.usd).toFixed(2));
+                          }
+                          // USDT
+                          if (data.balances.usdt) {
+                              $('#usdt-crypto').val(data.balances.usdt.crypto);
+                              $('#usdt-usd').val('$' + parseFloat(data.balances.usdt.usd).toFixed(2));
+                          }
+                          // BNB
+                          if (data.balances.bnb) {
+                              $('#bnb-crypto').val(data.balances.bnb.crypto);
+                              $('#bnb-usd').val('$' + parseFloat(data.balances.bnb.usd).toFixed(2));
+                          }
+                      }
+                  } else {
+                      $('#total-cont').text('0.00');
+                      console.log('Balance data not available:', data.error || 'Unknown error');
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error loading balance:', error);
+                  $('#total-cont').text('Error loading');
+              }
+          });
+      }
+
+      // Load balance on page load
+      loadUserBalance();
+
+      // Refresh balance every 30 seconds
+      setInterval(loadUserBalance, 30000);
+
+      // COMPLETELY REMOVE all existing event handlers from adminUser.js
+      $('.fund-btn, .deduct-btn').off('click');
+      $(document).off('click', '.fund-btn');
+      $(document).off('click', '.deduct-btn');
+      $._data(document, 'events'); // Clear all event data
+
+      // Handle Fund/Deduct button clicks - Stop all propagation
+      $(document).on('click', '.fund-btn', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+
+          // Close any existing modals from adminUser.js
+          $('.fund-modal, .deduct-modal, .modal').modal('hide').remove();
+          $('.modal-backdrop').remove();
+
+          var crypto = $(this).attr('id').toUpperCase();
+          showFundModal(crypto);
+          return false;
+      });
+
+      $(document).on('click', '.deduct-btn', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+
+          // Close any existing modals from adminUser.js
+          $('.fund-modal, .deduct-modal, .modal').modal('hide').remove();
+          $('.modal-backdrop').remove();
+
+          var crypto = $(this).attr('id').toUpperCase();
+          showDeductModal(crypto);
+          return false;
+      });
+
+      // Show Fund Modal
+      function showFundModal(crypto) {
+          var modalHtml = `
+              <div class="modal fade" id="fundModal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title">Fund User ${crypto} Wallet</h5>
+                              <button type="button" class="close" data-dismiss="modal">
+                                  <span>&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <form id="fundForm">
+                                  <div class="form-group">
+                                      <label>Amount (${crypto})</label>
+                                      <input type="number" step="0.00000001" class="form-control" id="fundAmount" placeholder="Enter amount" required>
+                                  </div>
+                                  <div class="alert alert-info">
+                                      <strong>Note:</strong> This will add ${crypto} to the user's balance.
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              <button type="button" class="btn btn-primary" id="confirmFund">Fund ${crypto}</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          `;
+
+          // Remove existing modal if any
+          $('#fundModal').remove();
+
+          // Add modal to body
+          $('body').append(modalHtml);
+
+          // Show modal
+          $('#fundModal').modal('show');
+
+          // Handle confirm button
+          $('#confirmFund').off('click').on('click', function() {
+              var amount = parseFloat($('#fundAmount').val());
+              if (amount && amount > 0) {
+                  fundCrypto(crypto, amount);
+              } else {
+                  toastr.error('Please enter a valid amount', 'Error');
+              }
+          });
+      }
+
+      // Show Deduct Modal
+      function showDeductModal(crypto) {
+          var modalHtml = `
+              <div class="modal fade" id="deductModal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title">Deduct User ${crypto} Wallet</h5>
+                              <button type="button" class="close" data-dismiss="modal">
+                                  <span>&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <form id="deductForm">
+                                  <div class="form-group">
+                                      <label>Amount (${crypto})</label>
+                                      <input type="number" step="0.00000001" class="form-control" id="deductAmount" placeholder="Enter amount" required>
+                                  </div>
+                                  <div class="alert alert-warning">
+                                      <strong>Warning:</strong> This will deduct ${crypto} from the user's balance. Make sure they have sufficient balance.
+                                  </div>
+                              </form>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              <button type="button" class="btn btn-danger" id="confirmDeduct">Deduct ${crypto}</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          `;
+
+          // Remove existing modal if any
+          $('#deductModal').remove();
+
+          // Add modal to body
+          $('body').append(modalHtml);
+
+          // Show modal
+          $('#deductModal').modal('show');
+
+          // Handle confirm button
+          $('#confirmDeduct').off('click').on('click', function() {
+              var amount = parseFloat($('#deductAmount').val());
+              if (amount && amount > 0) {
+                  deductCrypto(crypto, amount);
+              } else {
+                  toastr.error('Please enter a valid amount', 'Error');
+              }
+          });
+      }
+
+      // Fund Crypto Function
+      function fundCrypto(crypto, amount) {
+          $.ajax({
+              url: '../bundle/connect/adminfund.php',
+              type: 'POST',
+              data: {
+                  email: userEmail,
+                  crypto: crypto.toLowerCase(),
+                  amount: amount
+              },
+              dataType: 'json',
+              beforeSend: function() {
+                  $('#confirmFund').prop('disabled', true).text('Processing...');
+              },
+              success: function(response) {
+                  if (response.success) {
+                      toastr.success(response.message, 'Success');
+                      $('#fundModal').modal('hide');
+                      // Reload balance
+                      setTimeout(function() {
+                          loadUserBalance();
+                      }, 500);
+                  } else {
+                      toastr.error(response.error || 'Failed to fund account', 'Error');
+                      $('#confirmFund').prop('disabled', false).text('Fund ' + crypto);
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', error);
+                  toastr.error('Connection error. Please try again.', 'Error');
+                  $('#confirmFund').prop('disabled', false).text('Fund ' + crypto);
+              }
+          });
+      }
+
+      // Deduct Crypto Function
+      function deductCrypto(crypto, amount) {
+          $.ajax({
+              url: '../bundle/connect/admindeduct.php',
+              type: 'POST',
+              data: {
+                  email: userEmail,
+                  crypto: crypto.toLowerCase(),
+                  amount: amount
+              },
+              dataType: 'json',
+              beforeSend: function() {
+                  $('#confirmDeduct').prop('disabled', true).text('Processing...');
+              },
+              success: function(response) {
+                  if (response.success) {
+                      toastr.success(response.message, 'Success');
+                      $('#deductModal').modal('hide');
+                      // Reload balance
+                      setTimeout(function() {
+                          loadUserBalance();
+                      }, 500);
+                  } else {
+                      toastr.error(response.error || 'Failed to deduct from account', 'Error');
+                      $('#confirmDeduct').prop('disabled', false).text('Deduct ' + crypto);
+                  }
+              },
+              error: function(xhr, status, error) {
+                  console.error('Error:', error);
+                  toastr.error('Connection error. Please try again.', 'Error');
+                  $('#confirmDeduct').prop('disabled', false).text('Deduct ' + crypto);
+              }
+          });
+      }
+  }, 1000); // Wait 1 second for adminUser.js module to load
+  </script>
 </body>
 
 </html>

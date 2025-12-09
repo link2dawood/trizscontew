@@ -30,7 +30,8 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
   <link href="css/vendor/assets/libs/toastr/build/toastr.min.css" rel="stylesheet">
   <link href="css/vendor/dist/css/style.min.css" rel="stylesheet" />
   <script src="//code.iconify.design/1/1.0.6/iconify.min.js"></script>
-  <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
   <link rel="stylesheet" href="css/main.css">
   <script src="css/vendor/assets/libs/jquery/dist/jquery.min.js"></script>
 
@@ -991,7 +992,7 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
 
 
 
-  <script type="module" defer src="<?php echo($js)?>adminSetup.js"></script>
+  <script type="module" defer src="<?php echo($js)?>adminSetup.js?v=<?php echo time(); ?>"></script>
   <script src="css/vendor/assets/libs/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap tether Core JavaScript -->
   <script src="css/vendor/assets/libs/popper.js/dist/umd/popper.min.js"></script>

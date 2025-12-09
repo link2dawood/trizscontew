@@ -71,113 +71,164 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
             color: #F7F7F7;
         }
 
-        /* Carousel horizontal layout fix */
+        /* Carousel horizontal fix */
         .assets__carousel {
-            position: relative;
             display: flex;
-            flex-wrap: nowrap;
-            gap: 1.5rem;
+            flex-direction: row;
+            gap: 1rem;
             overflow-x: auto;
             overflow-y: hidden;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
             padding-bottom: 1rem;
         }
 
-        /* Hide scrollbar for Chrome, Safari and Opera */
         .assets__carousel::-webkit-scrollbar {
-            display: none;
+            height: 6px;
+        }
+
+        .assets__carousel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .assets__carousel::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
         }
 
         .assets__carousel .assets__item {
             flex: 0 0 auto;
-            width: 346px;
-            max-width: 346px;
             min-width: 280px;
+            max-width: 320px;
         }
 
-        /* Carousel arrows restyle */
-        .assets__carousel {
+        .assets {
+            width: 100%;
             position: relative;
         }
-        /* .assets-carousel__arrows {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            border-radius: 999px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-        } */
-        /* .assets-carousel__arrows a {
-            width: 38px;
-            height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+
+        /* Header and content spacing fix */
+        body {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .header {
+            position: relative !important;
+            background: #1E1F25;
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .header .to-add.container {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .dashboard.dash-body {
+            margin-top: 0;
+            padding-top: 1rem;
+        }
+
+        .container.container--dashboard {
+            padding-top: 0;
+        }
+
+        .complete-card.complete-card--type-1-v1.main-board {
+            margin-top: 0;
+        }
+        .header.transparent {
+            padding: 0 !important;
+            position: relative !important;
+            width: 100%;
+            top: 0;
+            background-color: #141518 !important;
+            /* border-bottom: 1px solid #9295AB !important; */
+            border: 0;
+            left: 0;
+            z-index: 999;
+        }
+
+        /* Growth Monitor styling fix */
+        .current-chart-info {
+            min-height: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .current-chart-info:empty::before {
+            content: "Loading...";
+            color: #9295AB;
+            font-size: 13px;
+        }
+
+        /* Hide NaN values */
+        .current-chart-info:has(*:empty) {
+            display: none;
+        }
+
+        .complete-card__head-title {
+            margin-bottom: 0;
+        }
+
+        .growth-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
             border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12);
-            transition: transform .15s ease, background .15s ease, border-color .15s ease;
-        }
-        .assets-carousel__arrows a:hover {
-            transform: translateY(-1px);
-            background: rgba(111,134,255,0.15);
-            border-color: rgba(111,134,255,0.4);
-        }
-        .assets-carousel__arrows img {
-            width: 16px;
-            height: 16px;
-        }
-        .slick__pagination {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 14px;
-        }
-        .assets-carousel__pagination {
-            display: flex;
-            align-items: center;
-        } */
-        .dashboard .assets .slick__pagination .assets-carousel__arrows {
-            top: 78px !important;
+            margin-left: 8px;
+            animation: pulse 2s infinite;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 1199.98px) {
-            .assets__carousel {
-                gap: 1rem;
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
             }
-            .assets__carousel .assets__item {
-                width: 300px;
-                max-width: 300px;
-                min-width: 260px;
+            50% {
+                opacity: 0.5;
             }
         }
 
-        @media (max-width: 767.98px) {
-            .assets__carousel {
-                gap: 0.75rem;
-            }
-            .assets__carousel .assets__item {
-                width: 280px;
-                max-width: 280px;
-                min-width: 240px;
-            }
+        /* Fix Growth Monitor tabs */
+        .complete-card__head-tabs .nav-link {
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 575.98px) {
-            .assets__carousel {
-                gap: 0.5rem;
-            }
-            .assets__carousel .assets__item {
-                width: 260px;
-                max-width: 260px;
-                min-width: 220px;
-            }
+        .complete-card__head-tabs .nav-link:hover {
+            opacity: 0.8;
+        }
+
+        .complete-card__head-tabs .nav-link.active {
+            color: #fff !important;
+            font-weight: bold;
+        }
+
+        .dropdown-menu .dropdown-item {
+            cursor: pointer;
+        }
+
+        .dropdown-menu .dropdown-item.active {
+            background-color: #1B65F2;
+            color: #fff;
+        }
+
+        /* Hide undefined/NaN in tooltips */
+        .apexcharts-tooltip-title:empty {
+            display: none !important;
+        }
+
+        .apexcharts-tooltip:empty {
+            display: none !important;
+        }
+
+        /* Hide tooltips containing undefined */
+        .apexcharts-tooltip-text-y-value:contains('undefined'),
+        .apexcharts-tooltip-title:contains('undefined') {
+            display: none !important;
         }
 
     </style>
@@ -796,6 +847,130 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
       $(this).text("Play");
     }
   });
+
+  // Fix NaN display in Growth Monitor
+  setInterval(function() {
+    $('.current-chart-info').each(function() {
+      var text = $(this).text();
+      if (text.includes('NaN')) {
+        $(this).html(text.replace(/NaN/g, '0').replace(/\+0%/g, '--'));
+      }
+    });
+  }, 1000);
+
+  // Update Growth Monitor with real crypto data
+  function updateGrowthMonitor() {
+    $.ajax({
+      url: 'bundle/connect/cryptodata.php',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        var currentChartInfo = $('.current-chart-info');
+        if (currentChartInfo.length > 0) {
+          // Find the best performing coin
+          var bestCoin = null;
+          var bestChange = -Infinity;
+
+          $.each(data, function(symbol, coinData) {
+            if (coinData.change_24h > bestChange) {
+              bestChange = coinData.change_24h;
+              bestCoin = coinData;
+              bestCoin.symbol = symbol;
+            }
+          });
+
+          if (bestCoin && bestCoin.change_24h !== undefined && !isNaN(bestCoin.change_24h)) {
+            var changeText = (bestCoin.change_24h > 0 ? '+' : '') + bestCoin.change_24h.toFixed(2);
+            var changeColor = bestCoin.change_24h > 0 ? '#11CABE' : '#D82122';
+
+            var html = '<p style="display: flex; align-items: center; gap: .3rem;">' +
+                       '<img class="fg-items__icon" style="width: 19px;" src="' + bestCoin.image + '" alt="">' +
+                       '<span style="font-weight: bold;">' + bestCoin.symbol + '</span>' +
+                       '<span style="width: 10px; height: 4px; background: #BD47FB;"></span></p>' +
+                       '<p><span style="font-size: 12px;"><span style="color: ' + changeColor + ';">' + changeText + '%</span> in 24 hours</span></p>';
+
+            currentChartInfo.html(html);
+          }
+        }
+      },
+      error: function() {
+        console.log('Failed to fetch crypto data');
+      }
+    });
+  }
+
+  // Update immediately and then every 60 seconds
+  updateGrowthMonitor();
+  setInterval(updateGrowthMonitor, 60000);
+
+  // Fix tab switching for Growth Monitor
+  setTimeout(function() {
+    // Handle navbar tabs
+    $('#pills-tab .nav-link').off('click').on('click', function(e) {
+      e.preventDefault();
+      var target = $(this).data('bs-target');
+
+      // Remove active from all tabs
+      $('#pills-tab .nav-link').removeClass('active');
+      $('.tab-pane').removeClass('show active');
+
+      // Add active to clicked tab
+      $(this).addClass('active');
+      $(target).addClass('show active');
+
+      // Update dropdown text for mobile
+      var tabText = $(this).text().trim();
+      $('#dropdownMenuButton1').html(tabText + ' <img src="../assets/media/images/icons/arrow-down.svg" alt="">');
+    });
+
+    // Handle dropdown items (mobile)
+    $('.dropdown-menu .dropdown-item').off('click').on('click', function(e) {
+      e.preventDefault();
+      var target = $(this).data('bs-target');
+
+      // Remove active from all
+      $('.dropdown-menu .dropdown-item').removeClass('active');
+      $('#pills-tab .nav-link').removeClass('active');
+      $('.tab-pane').removeClass('show active');
+
+      // Add active
+      $(this).addClass('active');
+      var correspondingNavLink = $('#pills-tab .nav-link[data-bs-target="' + target + '"]');
+      correspondingNavLink.addClass('active');
+      $(target).addClass('show active');
+
+      // Update dropdown button text
+      var tabText = $(this).text().trim();
+      $('#dropdownMenuButton1').html(tabText + ' <img src="../assets/media/images/icons/arrow-down.svg" alt="">');
+    });
+  }, 500);
+
+  // Simple fix for tooltips - just hide "undefined" text
+  setInterval(function() {
+    $('.apexcharts-tooltip').each(function() {
+      var $tooltip = $(this);
+      var text = $tooltip.text();
+
+      if (text.includes('undefined')) {
+        $tooltip.find('.apexcharts-tooltip-title').each(function() {
+          if ($(this).text() === 'undefined') {
+            $(this).hide();
+          }
+        });
+
+        $tooltip.find('.apexcharts-tooltip-series-group').each(function() {
+          var seriesText = $(this).text();
+          if (seriesText.includes('undefined')) {
+            $(this).find('.apexcharts-tooltip-text-y-label').each(function() {
+              if ($(this).text() === 'undefined:') {
+                $(this).text('');
+              }
+            });
+          }
+        });
+      }
+    });
+  }, 100);
 });
 
 	</script>
@@ -833,57 +1008,6 @@ headerProfileAvatar.addEventListener("click", function(event) {
   event.stopPropagation();
 });
 
-// Carousel scroll functionality
-document.addEventListener("DOMContentLoaded", function() {
-    const carousel = document.querySelector('.assets__carousel');
-    const prevBtn = document.querySelector('.assets-carousel__prev');
-    const nextBtn = document.querySelector('.assets-carousel__next');
-
-    if (carousel && prevBtn && nextBtn) {
-        const scrollAmount = 346 + 24; // card width + gap
-
-        prevBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            carousel.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth'
-            });
-        });
-
-        nextBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            carousel.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-        });
-
-        // Optional: Hide prev/next buttons when at start/end
-        function updateArrowsVisibility() {
-            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-            if (carousel.scrollLeft <= 0) {
-                prevBtn.style.opacity = '0.4';
-                prevBtn.style.pointerEvents = 'none';
-            } else {
-                prevBtn.style.opacity = '1';
-                prevBtn.style.pointerEvents = 'auto';
-            }
-
-            if (carousel.scrollLeft >= maxScroll - 1) {
-                nextBtn.style.opacity = '0.4';
-                nextBtn.style.pointerEvents = 'none';
-            } else {
-                nextBtn.style.opacity = '1';
-                nextBtn.style.pointerEvents = 'auto';
-            }
-        }
-
-        carousel.addEventListener('scroll', updateArrowsVisibility);
-        updateArrowsVisibility(); // Initial check
-    }
-});
-
 </script>
     <?php if(!empty($file)): ?>
     <script src="<?php echo $file; ?>"></script>
@@ -907,9 +1031,9 @@ document.addEventListener("DOMContentLoaded", function() {
         };
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js?v=<?php echo time(); ?>" crossorigin="anonymous"></script>
     <script type="module" defer src="<?php echo($js)?>dashboard.js?v=<?php echo time(); ?>"></script>
     <script type="text/javascript" src="//raw.githubusercontent.com/shantanubala/haptics.js/master/haptics.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js?v=<?php echo time(); ?>" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js?v=<?php echo time(); ?>" crossorigin="anonymous"></script>
 
 </body>
