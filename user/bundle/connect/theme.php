@@ -25,14 +25,14 @@ if($result = mysqli_query($dbconnected, $sql)){
   $image = '';
   $js = '';
   if($name === 'Cryptilo Blue' || $name === 'My Custom' || $name === 'MGM Base' || $name === 'Horizon' || $name === 'Refresh') {
-    $style = $protocol.$hostname.'/others/trizscontew/user/themes/'.$data;
-    $image = $protocol.$hostname.'/others/trizscontew/user/themes/'.$img;
-    $js = $protocol.$hostname.'/others/trizscontew/user/'.$script.'/';
+    $style = $protocol.$hostname.'/user/themes/'.$data;
+    $image = $protocol.$hostname.'/user/themes/'.$img;
+    $js = $protocol.$hostname.'/user/'.$script.'/';
   } else {
     $style = $data;
     $image = $img;
     if(substr($script, 0, 5) == 'AppSc' || substr($script, 0, 5) == 'Appsc') {
-      $js = $protocol.$hostname.'/others/trizscontew/user/'.$script.'/';
+      $js = $protocol.$hostname.'/user/'.$script.'/';
     } else {
       $js = $script;
     }
