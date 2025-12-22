@@ -11,6 +11,71 @@ foreach (glob("bundle/dashboard/index.php") as $index) {
 }
 foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
       foreach (glob("bundle/refer/refer_earning.php") as $referer_earning ){include $referer_earning;}
+
+// Map symbols to CoinGecko API IDs (lowercase names used in API)
+$crypto_api_ids = array(
+    'BTC' => 'bitcoin',
+    'ETH' => 'ethereum',
+    'USDT' => 'tether',
+    'BNB' => 'binancecoin',
+);
+
+// Complete cryptocurrency data
+$cryptocurrencies = array(
+    'bitcoin' => array(
+        'name' => 'Bitcoin',
+        'symbol' => 'BTC',
+        'icon' => '../assets/media/images/icons/Bitcoin.svg'
+    ),
+    'ethereum' => array(
+        'name' => 'Ethereum',
+        'symbol' => 'ETH',
+        'icon' => '../assets/media/images/icons/ETH.svg'
+    ),
+    'tether' => array(
+        'name' => 'Tether',
+        'symbol' => 'USDT',
+        'icon' => '../assets/media/images/icons/logo-usdt.svg'
+    ),
+    'binancecoin' => array(
+        'name' => 'Binance Coin',
+        'symbol' => 'BNB',
+        'icon' => '../assets/media/images/icons/logo-bnb.svg'
+    )
+);
+
+$crypto_icons = array();
+foreach ($cryptocurrencies as $crypto_data) {
+    $crypto_icons[$crypto_data['symbol']] = $crypto_data['icon'];
+}
+
+function getMarketCoins($currency = 'usd') {
+    $ids = 'bitcoin,ethereum,tether,binancecoin';
+    $url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency={$currency}&ids={$ids}&price_change_percentage=24h";
+    $response = @file_get_contents($url);
+    if (!$response) return [];
+    $data = json_decode($response, true);
+    return is_array($data) ? $data : [];
+}
+
+if(isset($_REQUEST['command']) && $_REQUEST['command'] == 'getMarketCoins'){
+    $currency = $_REQUEST['currency'] ?? 'usd';
+    $coins = getMarketCoins($currency);
+    $result = array();
+    foreach ($coins as $coin) {
+        $symbol = strtoupper($coin['symbol'] ?? '');
+        $result[] = array(
+            'symbol' => $symbol,
+            'name' => $coin['name'] ?? $symbol,
+            'price' => $coin['current_price'] ?? 0,
+            'market_cap' => $coin['market_cap'] ?? 0,
+            'change_24h' => $coin['price_change_percentage_24h'] ?? 0,
+            'icon' => $crypto_icons[$symbol] ?? ($coin['image'] ?? '')
+        );
+    }
+    echo json_encode(array('coins' => $result));
+    exit;
+}
 ?>
 
 <!doctype html>
@@ -1255,6 +1320,164 @@ headerProfileAvatar.addEventListener("click", function(event) {
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
      <script type="module" defer src="<?php echo($js)?>market/market.js"></script>
+     <script>
+     window.addEventListener('load', function () {
+         var currencyCodeEl = document.getElementById('currency_code');
+         var currencyCode = currencyCodeEl ? currencyCodeEl.textContent.trim() : 'USD';
+         var apiCurrency = currencyCode ? currencyCode.toLowerCase() : 'usd';
+
+         function formatNumber(value) {
+             var num = Number(value) || 0;
+             return num.toLocaleString('en-US', { maximumFractionDigits: 2 });
+         }
+
+         function formatMoney(value) {
+             return currencyCode + ' ' + formatNumber(value);
+         }
+
+         function setText(selector, value) {
+             var el = document.querySelector(selector);
+             if (el) el.textContent = value;
+         }
+
+         function setSrc(selector, value) {
+             var el = document.querySelector(selector);
+             if (el) el.src = value || '';
+         }
+
+         function setTrendClasses(el, isUp) {
+             if (!el) return;
+             el.classList.toggle('text-bullish', isUp);
+             el.classList.toggle('text-bearish', !isUp);
+         }
+
+         function renderCoins(coins) {
+             if (!coins.length) return;
+
+             coins.forEach(function (coin) {
+                 coin.change_24h = Number(coin.change_24h) || 0;
+                 coin.market_cap = Number(coin.market_cap) || 0;
+             });
+
+             var topGainer = coins.reduce(function (best, coin) {
+                 return coin.change_24h > best.change_24h ? coin : best;
+             }, coins[0]);
+
+             var topCap = coins.reduce(function (best, coin) {
+                 return coin.market_cap > best.market_cap ? coin : best;
+             }, coins[0]);
+
+             var avgChange = coins.reduce(function (sum, coin) {
+                 return sum + coin.change_24h;
+             }, 0) / coins.length;
+
+             setText('.market-is', 'Market is');
+             setText('.up-down', avgChange >= 0 ? 'up' : 'down');
+             setText('.up-down-percent', (avgChange >= 0 ? '+' : '') + avgChange.toFixed(2) + '%');
+             setTrendClasses(document.querySelector('.up-down'), avgChange >= 0);
+             setTrendClasses(document.querySelector('.up-down-percent'), avgChange >= 0);
+
+             setText('.top-gainer-price', formatMoney(topGainer.price));
+             setText('.top-gainer-name', topGainer.name);
+             setText('.top-gainer-short', topGainer.symbol);
+             setText('.top-gainer-percent', (topGainer.change_24h >= 0 ? '+' : '') + topGainer.change_24h.toFixed(2) + '%');
+             setSrc('.top-gainer-icon', topGainer.icon);
+             var topArrow = document.querySelector('.standard-card__content-arrow');
+             if (topArrow) {
+                 topArrow.src = topGainer.change_24h >= 0
+                     ? '../assets/media/images/icons/green-arrow-up.svg'
+                     : '../assets/media/images/icons/red-arrow-down.svg';
+             }
+
+             setText('.highest-vol', formatMoney(topCap.price));
+             setText('.highest-vol-name', topCap.name);
+             setText('.highest-vol-short', topCap.symbol);
+             setSrc('.highest-vol-icon', topCap.icon);
+
+             var assetsList = document.querySelector('.assets-list');
+             if (!assetsList || assetsList.children.length > 0) return;
+
+             var tradeHeader = Array.prototype.find.call(
+                 document.querySelectorAll('th.table__head'),
+                 function (th) { return th.textContent.trim() === 'Trade'; }
+             );
+             var tradeHiddenClass = '';
+             if (tradeHeader) {
+                 tradeHiddenClass = tradeHeader.className
+                     .split(/\s+/)
+                     .filter(function (cls) { return cls && cls !== 'fb-regular' && cls !== 'table__head'; })
+                     .join(' ');
+             }
+
+             var rows = coins.map(function (coin) {
+                 var changeClass = coin.change_24h >= 0 ? 'text-bullish' : 'text-bearish';
+                 var changeText = (coin.change_24h >= 0 ? '+' : '') + coin.change_24h.toFixed(2) + '%';
+                 return '' +
+                     '<tr class="asset-element">' +
+                     '<td class="table__assets">' +
+                     '<div class="table__assets-crypto">' +
+                     '<img src="' + (coin.icon || '') + '" alt="" class="table__assets-crypto-icon">' +
+                     '<p class="fb-regular fb-regular--bold table__assets-crypto-abbr">' + coin.symbol + '</p>' +
+                     '</div>' +
+                     '</td>' +
+                     '<td><p class="fb-regular table__assets-name">' + coin.name + '</p></td>' +
+                     '<td class="market-btns ' + tradeHiddenClass + '">' +
+                     '<div class="buttons">' +
+                     '<div class="buy buy-btn" id="buy-' + coin.symbol + '">Buy</div>' +
+                     '<div class="sell sell-btn" id="sell-' + coin.symbol + '">Sell</div>' +
+                     '</div>' +
+                     '</td>' +
+                     '<td><p class="fb-regular">' + formatMoney(coin.price) + '</p></td>' +
+                     '<td><p class="fb-regular">' + formatMoney(coin.market_cap) + '</p></td>' +
+                     '<td><p class="fb-regular table__market ' + changeClass + '">' + changeText + '</p></td>' +
+                     '<td class="table__chart"><div class="table__chart-wrapper"><div class="table__chart-render">--</div></div></td>' +
+                     '</tr>';
+             }).join('');
+
+             assetsList.innerHTML = rows;
+         }
+
+         function loadFallback() {
+             return fetch('assets/crypto-fallback.json')
+                 .then(function (res) { return res.json(); })
+                 .then(function (data) {
+                     var raw = data && data.data && data.data.cryptoData ? data.data.cryptoData : [];
+                     var coins = raw.filter(function (coin) {
+                         return coin && coin.coin && coin.coincode && coin.coincode !== 'EUR' &&
+                             coin.coincode !== 'YEN' && coin.coincode !== 'Info';
+                     }).map(function (coin) {
+                         var price = Number(String(coin.price || '0').replace('$', '').trim()) || 0;
+                         var change = Number(String(coin.change1hr || '0').replace('%', '').trim()) || 0;
+                         var cap = Number(String(coin.marketCap || '0').replace('$', '').trim()) || 0;
+                         return {
+                             symbol: coin.coincode,
+                             name: coin.coin,
+                             price: price,
+                             market_cap: cap,
+                             change_24h: change,
+                             icon: coin.coinimage || ''
+                         };
+                     });
+                     renderCoins(coins);
+                 })
+                 .catch(function () {});
+         }
+
+         fetch('market.php?command=getMarketCoins&currency=' + encodeURIComponent(apiCurrency))
+             .then(function (res) { return res.json(); })
+             .then(function (data) {
+                 var coins = Array.isArray(data.coins) ? data.coins : [];
+                 if (!coins.length) {
+                     loadFallback();
+                     return;
+                 }
+                 renderCoins(coins);
+             })
+             .catch(function () {
+                 loadFallback();
+             });
+     });
+     </script>
      <script type="text/javascript" src="//raw.githubusercontent.com/shantanubala/haptics.js/master/haptics.js"></script>
 </body>
 

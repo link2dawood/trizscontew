@@ -12,6 +12,111 @@ foreach (glob("bundle/dashboard/index.php") as $index) {
 foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
       foreach (glob("bundle/refer/refer_earning.php") as $referer_earning ){include $referer_earning;}
 
+// Cryptocurrency arrays
+// Map cryptocurrency names to symbols
+$crypto_symbols = array(
+    'Bitcoin' => 'BTC',
+    'Ethereum' => 'ETH',
+    'Tether' => 'USDT',
+    'BNB' => 'BNB',
+);
+
+// Map symbols to CoinGecko API IDs (lowercase names used in API)
+$crypto_api_ids = array(
+    'BTC' => 'bitcoin',
+    'ETH' => 'ethereum',
+    'USDT' => 'tether',
+    'BNB' => 'binancecoin',
+);
+
+// Reverse mapping: API IDs to symbols
+$crypto_id_to_symbol = array_flip($crypto_api_ids);
+
+// Complete cryptocurrency data
+$cryptocurrencies = array(
+    'bitcoin' => array(
+        'name' => 'Bitcoin',
+        'symbol' => 'BTC',
+        'icon' => '../assets/media/images/icons/Bitcoin.svg'
+    ),
+    'ethereum' => array(
+        'name' => 'Ethereum',
+        'symbol' => 'ETH',
+        'icon' => '../assets/media/images/icons/ETH.svg'
+    ),
+    'tether' => array(
+        'name' => 'Tether',
+        'symbol' => 'USDT',
+        'icon' => '../assets/media/images/icons/logo-usdt.svg'
+    ),
+    'binancecoin' => array(
+        'name' => 'Binance Coin',
+        'symbol' => 'BNB',
+        'icon' => '../assets/media/images/icons/logo-bnb.svg'
+    )
+);
+
+$crypto_icons = array();
+foreach ($cryptocurrencies as $crypto_data) {
+    $crypto_icons[$crypto_data['symbol']] = $crypto_data['icon'];
+}
+
+// Helper function to get crypto data by symbol
+function getCryptoBySymbol($symbol) {
+    global $crypto_api_ids, $cryptocurrencies;
+    $api_id = $crypto_api_ids[$symbol] ?? null;
+    return $api_id ? $cryptocurrencies[$api_id] : null;
+}
+
+// Helper function to get crypto data by API ID
+function getCryptoById($api_id) {
+    global $cryptocurrencies;
+    return $cryptocurrencies[$api_id] ?? null;
+}
+
+// Helper function to get all crypto symbols
+function getAllCryptoSymbols() {
+    global $cryptocurrencies;
+    return array_column($cryptocurrencies, 'symbol');
+}
+
+function getCryptoPrice($coin, $currency = 'usd') {
+    $url = "https://api.coingecko.com/api/v3/simple/price?ids={$coin}&vs_currencies={$currency}";
+    $response = @file_get_contents($url);
+    if (!$response) return 0;
+    $data = json_decode($response, true);
+    return $data[$coin][$currency] ?? 0;
+}
+function getMarketChart($coin, $days = 1, $currency = 'usd') {
+    $days = max(1, min(90, intval($days)));
+    $interval = $days <= 1 ? 'hourly' : 'daily';
+    $url = "https://api.coingecko.com/api/v3/coins/{$coin}/market_chart?vs_currency={$currency}&days={$days}&interval={$interval}";
+    $response = @file_get_contents($url);
+    if (!$response) return [];
+    $data = json_decode($response, true);
+    return $data['prices'] ?? [];
+}
+// $btc_result=getCryptoPrice('bitcoin','usd');
+// // echo 'here we are';
+// print_r($btc_result);
+// die();
+if(isset($_REQUEST['command']) && $_REQUEST['command'] == 'getCryptoPrice'){
+    $coin = $_REQUEST['coin'] ?? 'bitcoin';
+    $currency = $_REQUEST['currency'] ?? 'usd';
+    $price = getCryptoPrice($coin, $currency);
+    echo json_encode(['price' => $price]);
+    exit;
+}
+
+if(isset($_REQUEST['command']) && $_REQUEST['command'] == 'getMarketChart'){
+    $coin = $_REQUEST['coin'] ?? 'bitcoin';
+    $days = $_REQUEST['days'] ?? 1;
+    $currency = $_REQUEST['currency'] ?? 'usd';
+    $prices = getMarketChart($coin, $days, $currency);
+    echo json_encode(['prices' => $prices]);
+    exit;
+}
+
 ?> 
  
 
@@ -232,6 +337,8 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
         }
 
     </style>
+    <script>window.cryptoApiIds = <?php echo json_encode($crypto_api_ids); ?>;</script>
+    <script>window.cryptoIcons = <?php echo json_encode($crypto_icons); ?>;</script>
 </head>
 
 <body class="">
@@ -571,17 +678,13 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
                                             <img class="forms-currency__icon-arrow-down"
                                         src="../assets/media/images/icons/arrow-down.svg" alt="">
                                     <div class="forms-group__dropdown js-forms-group__dropdown get-select get-dropdown">
-                                        
-                                        <!-- <div class="forms-group__items crypto-item" id="usdt" data-selected="usd"><img
-                                                class="fg-items__icon" src="../assets/media/images/icons/usdt.svg"
+                                        <?php foreach($cryptocurrencies as $crypto_id => $crypto_data):
+                                            $symbol_lower = strtolower($crypto_data['symbol']);
+                                        ?>
+                                        <div class="forms-group__items crypto-item" id="<?php echo $symbol_lower; ?>" data-selected="<?php echo $symbol_lower; ?>"><img
+                                                class="fg-items__icon" src="<?php echo $crypto_data['icon']; ?>"
                                                 alt=""></div>
-                                                <div class="forms-group__items crypto-item" id="btc" data-selected="btc"><img
-                                                class="fg-items__icon" src="../assets/media/images/icons/logo-btc.svg"
-                                                alt=""></div>
-                                        <div class="forms-group__items crypto-item" id="eth" data-selected="eth"><img class="fg-items__icon"
-                                                src="../assets/media/images/icons/logo-eth.svg" alt=""></div>
-                                        <div class="forms-group__items crypto-item" id="bnb" data-selected="bnb"><img class="fg-items__icon"
-                                                src="../assets/media/images/icons/logo-bnb.svg" alt=""></div> -->
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                             </div>
@@ -656,114 +759,35 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
                 </div>
                 <div class="assets">
                     <div class="assets__carousel">
+                        <?php foreach($cryptocurrencies as $crypto_id => $crypto_data):
+                            $symbol_lower = strtolower($crypto_data['symbol']);
+                        ?>
                         <div class="standard-card standard-card--type-3-v1 assets__item">
                             <div class="container">
                                 <div class="standard-card__content">
                                     <div class="standard-card__content-graph"><img
-                                            src="../assets/media/images/icons/Bitcoin.svg" alt=""
+                                            src="<?php echo $crypto_data['icon']; ?>" alt=""
                                             class="standard-card__content-image">
                                         <div class="standard-card__content-chart-wrapper graph-area">
-                                            <img class="btc-graph" src="" alt="">
-                                            <!-- <div id="standard-card__content-chart-3"
-                                                class="standard-card__content-chart-render"></div> -->
+                                            <img class="<?php echo $symbol_lower; ?>-graph" src="" alt="">
                                         </div>
                                     </div>
                                     <div class="standard-card__content-percentage"><img
-                                            class="standard-card__content-arrow btc-arrow"
+                                            class="standard-card__content-arrow <?php echo $symbol_lower; ?>-arrow"
                                             src="" alt="">
-                                        <p class="standard-card__content-value btc-change"></p>
+                                        <p class="standard-card__content-value <?php echo $symbol_lower; ?>-change"></p>
                                     </div>
                                     <div class="standard-card__content-desc">
-                                        <p class="standard-card__content-desc-currency">Bitcoin</p>
+                                        <p class="standard-card__content-desc-currency"><?php echo $crypto_data['name']; ?></p>
                                         <div class="standard-card__content-desc-prices">
-                                            <p class="standard-card__content-desc-price btc-price"><span class="notranslate"><?php echo($ip_addr)?></span> 0.00</p>
-                                            <p class="standard-card__content-desc-token">BTC</p>
+                                            <p class="standard-card__content-desc-price <?php echo $symbol_lower; ?>-price"><span class="notranslate"><?php echo($ip_addr)?></span> 0.00</p>
+                                            <p class="standard-card__content-desc-token"><?php echo $crypto_data['symbol']; ?></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="standard-card standard-card--type-3-v1 assets__item">
-                            <div class="container">
-                                <div class="standard-card__content">
-                                    <div class="standard-card__content-graph"><img
-                                            src="../assets/media/images/icons/ETH.svg" alt=""
-                                            class="standard-card__content-image">
-                                        <div class="standard-card__content-chart-wrapper graph-area">
-                                        <img class="eth-graph" src="" alt="">
-                                            <!-- <div id="standard-card__content-chart-5"
-                                                class="standard-card__content-chart-render"></div> -->
-                                        </div>
-                                    </div>
-                                    <div class="standard-card__content-percentage"><img
-                                            class="standard-card__content-arrow eth-arrow"
-                                            src="" alt="">
-                                        <p class="standard-card__content-value eth-change"></p>
-                                    </div>
-                                    <div class="standard-card__content-desc">
-                                        <p class="standard-card__content-desc-currency">Ethereum</p>
-                                        <div class="standard-card__content-desc-prices">
-                                            <p class="standard-card__content-desc-price eth-price"><span class="notranslate"><?php echo($ip_addr)?></span> 0.00</p>
-                                            <p class="standard-card__content-desc-token">ETH</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="standard-card standard-card--type-3-v1 assets__item">
-                            <div class="container">
-                                <div class="standard-card__content">
-                                    <div class="standard-card__content-graph"><img
-                                            src="../assets/media/images/icons/logo-usdt.svg" alt=""
-                                            class="standard-card__content-image">
-                                        <div class="standard-card__content-chart-wrapper graph-area">
-                                        <img class="usdt-graph" src="" alt="">
-                                            <!-- <div id="standard-card__content-chart-3-2"
-                                                class="standard-card__content-chart-render"></div> -->
-                                        </div>
-                                    </div>
-                                    <div class="standard-card__content-percentage"><img
-                                            class="standard-card__content-arrow usdt-arrow"
-                                            src="" alt="">
-                                        <p class="standard-card__content-value usdt-change"></p>
-                                    </div>
-                                    <div class="standard-card__content-desc">
-                                        <p class="standard-card__content-desc-currency">Tether</p>
-                                        <div class="standard-card__content-desc-prices">
-                                            <p class="standard-card__content-desc-price usdt-price"><span class="notranslate"><?php echo($ip_addr)?></span> 0.00</p>
-                                            <p class="standard-card__content-desc-token">USDT</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="standard-card standard-card--type-3-v1 assets__item">
-                            <div class="container">
-                                <div class="standard-card__content">
-                                    <div class="standard-card__content-graph"><img
-                                            src="../assets/media/images/icons/logo-bnb.svg" alt=""
-                                            class="standard-card__content-image">
-                                        <div class="standard-card__content-chart-wrapper graph-area">
-                                        <img class="bnb-graph" src="" alt="">
-                                            <!-- <div id="standard-card__content-chart-5-2"
-                                                class="standard-card__content-chart-render"></div> -->
-                                        </div>
-                                    </div>
-                                    <div class="standard-card__content-percentage"><img
-                                            class="standard-card__content-arrow bnb-arrow"
-                                            src="" alt="">
-                                        <p class="standard-card__content-value bnb-change"></p>
-                                    </div>
-                                    <div class="standard-card__content-desc">
-                                        <p class="standard-card__content-desc-currency">Binance Coin</p>
-                                        <div class="standard-card__content-desc-prices">
-                                            <p class="standard-card__content-desc-price bnb-price"><span class="notranslate"><?php echo($ip_addr)?></span> 0.00</p>
-                                            <p class="standard-card__content-desc-token">BNB</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                     <div class="slick__pagination">
                         <div class="assets-carousel__arrows"><a href="#" class="assets-carousel__prev"><img
@@ -858,45 +882,115 @@ foreach (glob("bundle/refer/refer.php") as $refer ){include $refer;}
     });
   }, 1000);
 
-  // Update Growth Monitor with real crypto data
-  function updateGrowthMonitor() {
-    $.ajax({
-      url: 'bundle/connect/cryptodata.php',
-      type: 'GET',
-      dataType: 'json',
-      success: function(data) {
-        var currentChartInfo = $('.current-chart-info');
-        if (currentChartInfo.length > 0) {
-          // Find the best performing coin
-          var bestCoin = null;
-          var bestChange = -Infinity;
+  // Update Growth Monitor with real crypto history (CoinGecko)
+  async function updateGrowthMonitor() {
+    var apiIds = window.cryptoApiIds || {};
+    var icons = window.cryptoIcons || {};
+    var symbols = Object.keys(apiIds);
+    if (!symbols.length || typeof ApexCharts === 'undefined') return;
 
-          $.each(data, function(symbol, coinData) {
-            if (coinData.change_24h > bestChange) {
-              bestChange = coinData.change_24h;
-              bestCoin = coinData;
-              bestCoin.symbol = symbol;
-            }
-          });
+    function toPercentSeries(prices) {
+      if (!prices || prices.length < 2) return null;
+      var base = prices[0][1];
+      if (!base) return null;
+      return prices.map(function(point) {
+        return ((point[1] - base) / base) * 100;
+      });
+    }
 
-          if (bestCoin && bestCoin.change_24h !== undefined && !isNaN(bestCoin.change_24h)) {
-            var changeText = (bestCoin.change_24h > 0 ? '+' : '') + bestCoin.change_24h.toFixed(2);
-            var changeColor = bestCoin.change_24h > 0 ? '#11CABE' : '#D82122';
+    function toLabels(prices, isDay) {
+      return prices.map(function(point) {
+        var date = new Date(point[0]);
+        return isDay
+          ? date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+          : date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      });
+    }
 
-            var html = '<p style="display: flex; align-items: center; gap: .3rem;">' +
-                       '<img class="fg-items__icon" style="width: 19px;" src="' + bestCoin.image + '" alt="">' +
-                       '<span style="font-weight: bold;">' + bestCoin.symbol + '</span>' +
-                       '<span style="width: 10px; height: 4px; background: #BD47FB;"></span></p>' +
-                       '<p><span style="font-size: 12px;"><span style="color: ' + changeColor + ';">' + changeText + '%</span> in 24 hours</span></p>';
-
-            currentChartInfo.html(html);
-          }
-        }
-      },
-      error: function() {
-        console.log('Failed to fetch crypto data');
+    function downsample(series, labels, target) {
+      if (!series || series.length === 0) return { series: [], labels: [] };
+      if (series.length <= target) return { series: series, labels: labels };
+      var outSeries = [];
+      var outLabels = [];
+      for (var i = 0; i < target; i++) {
+        var idx = Math.round(i * (series.length - 1) / (target - 1));
+        outSeries.push(series[idx]);
+        outLabels.push(labels[idx] || '');
       }
-    });
+      return { series: outSeries, labels: outLabels };
+    }
+
+    function updateChart(chartId, series, labels) {
+      if (!series || series.length === 0) return;
+      var barData = series.map(function(value) {
+        return Math.abs(value) * 0.2;
+      });
+      var min = Math.min.apply(null, series.concat(barData));
+      var max = Math.max.apply(null, series.concat(barData));
+      ApexCharts.exec(chartId, 'updateOptions', {
+        series: [
+          { name: 'Change', type: 'line', data: series },
+          { name: 'Change', type: 'line', data: series },
+          { name: 'Bar', type: 'column', data: barData }
+        ],
+        xaxis: { categories: labels },
+        yaxis: {
+          min: Math.floor(Math.min(0, min - 1)),
+          max: Math.ceil(Math.max(1, max + 1))
+        }
+      }, false, true);
+    }
+
+    var bestSymbol = null;
+    var bestChange = -Infinity;
+    var bestDaySeries = null;
+    var bestDayLabels = null;
+    var bestWeekSeries = null;
+    var bestWeekLabels = null;
+
+    for (var i = 0; i < symbols.length; i++) {
+      var symbol = symbols[i];
+      var apiId = apiIds[symbol];
+      try {
+        var dayResp = await fetch('dashboard.php?command=getMarketChart&coin=' + encodeURIComponent(apiId) + '&days=1&currency=usd').then(function(res) { return res.json(); });
+        var weekResp = await fetch('dashboard.php?command=getMarketChart&coin=' + encodeURIComponent(apiId) + '&days=7&currency=usd').then(function(res) { return res.json(); });
+
+        var dayPrices = dayResp && dayResp.prices ? dayResp.prices : null;
+        var weekPrices = weekResp && weekResp.prices ? weekResp.prices : null;
+        var daySeries = toPercentSeries(dayPrices);
+        if (!daySeries || daySeries.length === 0) continue;
+
+        var change = daySeries[daySeries.length - 1];
+        if (change > bestChange) {
+          bestChange = change;
+          bestSymbol = symbol;
+          bestDaySeries = daySeries;
+          bestDayLabels = toLabels(dayPrices, true);
+          bestWeekSeries = toPercentSeries(weekPrices);
+          bestWeekLabels = weekPrices ? toLabels(weekPrices, false) : [];
+        }
+      } catch (e) {}
+    }
+
+    if (!bestSymbol || !bestDaySeries) return;
+
+    var dayPack = downsample(bestDaySeries, bestDayLabels, 14);
+    var weekPack = downsample(bestWeekSeries || bestDaySeries, bestWeekLabels || bestDayLabels, 12);
+    updateChart('growth-day', dayPack.series, dayPack.labels);
+    updateChart('growth-week', weekPack.series, weekPack.labels);
+
+    var currentChartInfo = $('.current-chart-info');
+    if (currentChartInfo.length > 0) {
+      var changeText = (bestChange > 0 ? '+' : '') + bestChange.toFixed(2);
+      var changeColor = bestChange > 0 ? '#11CABE' : '#D82122';
+      var icon = icons[bestSymbol] || '';
+      var html = '<p style="display: flex; align-items: center; gap: .3rem;">' +
+                 '<img class="fg-items__icon" style="width: 19px;" src="' + icon + '" alt="">' +
+                 '<span style="font-weight: bold;">' + bestSymbol + '</span>' +
+                 '<span style="width: 10px; height: 4px; background: #BD47FB;"></span></p>' +
+                 '<p><span style="font-size: 12px;"><span style="color: ' + changeColor + ';">' + changeText + '%</span> in 24 hours</span></p>';
+      currentChartInfo.html(html);
+    }
   }
 
   // Update immediately and then every 60 seconds
@@ -1035,7 +1129,49 @@ headerProfileAvatar.addEventListener("click", function(event) {
     <script type="module" defer src="<?php echo($js)?>dashboard.js?v=<?php echo time(); ?>"></script>
     <script type="text/javascript" src="//raw.githubusercontent.com/shantanubala/haptics.js/master/haptics.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js?v=<?php echo time(); ?>" crossorigin="anonymous"></script>
+    <script>
+        // Complete AJAX Request function
+        function sendAjaxRequest(url, method, data, successCallback, errorCallback) {
+            $.ajax({
+                url: url,
+                type: method || 'GET',
+                data: data || {},
+                dataType: 'json',
+                success: function(response) {
+                    if (typeof successCallback === 'function') {
+                        successCallback(response);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error:', status, error);
+                    if (typeof errorCallback === 'function') {
+                        errorCallback(xhr, status, error);
+                    }
+                }
+            });
+        }
+
+        function getExchangeRate(coin, currency) {
+            sendAjaxRequest('dashboard.php?command=getCryptoPrice', 'GET', { coin: coin, currency: currency }, function(response) {
+                console.log('Exchange Rate Response:', response);
+                if (response && response.price) {
+                  console.log('Exchange Rate:', response.price);
+                } else {
+                    console.error('Invalid response format');
+                }
+            }, function(xhr, status, error) {
+                callback(error || 'AJAX request failed');
+            });
+        }
+
+        // Document ready - add your code here
+        $(document).ready(function () {
+            // Your code here
+            getExchangeRate('bitcoin', 'usd');
+        });
+    </script>
 
 </body>
  
 </html>
+
