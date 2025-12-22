@@ -1,9 +1,9 @@
 <?php
 // Initialize the session
-foreach(glob('../bundle/db/config.php') as $config){include_once $config;};
+require_once __DIR__ . '/../../bundle/db/config.php'; // stable absolute include
 
 // Check if the user is logged in, if not then redirect him to login page
-if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
    
  $avatar=$fname=$lname=$email=$phone=$country=$city=$zip_code=$address=$deposit=$ref_bonus=$main_balance="";
 $avatar_err=$fname_err=$lname_err=$email_err=$phone_err=$country_err=$city_err=$zip_code_err=$address_err=$deposit_err=$ref_bonus_err=$main_balance_err="";
@@ -35,36 +35,42 @@ if(isset($_POST["update"])) {
     if (empty($email)) {
         $email_err = "Field must not be empty";
     }
+    // Phone is optional - set empty string if not provided
     if (empty($phone)) {
-        $phone_err = "Field must not be empty";
+        $phone = "";
     }
+    // Country is optional - set empty string if not provided
     if (empty($country)) {
-        $country_err = "Field must not be empty";
+        $country = "";
     }
+    // City is optional - set empty string if not provided
     if (empty($city)) {
-        $city_err = "Field must not be empty";
+        $city = "";
     }
+    // Zip code is optional - set empty string if not provided
     if (empty($zip_code)) {
-        $zip_code_err = "Field must not be empty";
+        $zip_code = "";
     }
+    // Address is optional - set empty string if not provided
     if (empty($address)) {
-        $address_err = "Field must not be empty";
+        $address = "";
     }
-    if (is_null($deposit)) {
-        $deposit_err = "Field must not be empty";
+    // Set default values if fields are empty
+    if (empty($deposit)) {
+        $deposit = 0;
     }
-    if (is_null($ref_bonus)) {
-        $ref_bonus_err = "Field must not be empty";
+    if (empty($ref_bonus)) {
+        $ref_bonus = 0;
     }
-    if (is_null($main_balance)) {
-        $main_balance_err = "Field must not be empty";
+    if (empty($main_balance)) {
+        $main_balance = 0;
     }
 
 
     // Check input errors before inserting in database
-    if(empty($fname_err) && empty($lname_err) && empty($email_err) && empty($phone_err) && empty($country_err) && empty($city_err) && empty($zip_code_err) && empty($address_err) && empty($deposit_err) && empty($ref_bonus_err) && empty($main_balance_err)){
+    if(empty($fname_err) && empty($lname_err) && empty($email_err)){
         // Prepare an update statement
-        $sql = "UPDATE users SET fname=?, lname=?, email=?, phone=?, country=?, city=?, zip_code=?, address=?, profit=?, ref_bonus=?, main_balance=? WHERE id=?";
+        $sql = "UPDATE users SET fname=?, lname=?, email=?, phone=?, country=?, city=?, zip_code=?, address=?, profit=?, ref_bonus=?, crypto_btc=? WHERE id=?";
          
          $stmt = mysqli_stmt_init($dbconnected);
         if($stmt = mysqli_prepare($dbconnected, $sql)){
@@ -73,11 +79,11 @@ if(isset($_POST["update"])) {
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
-                // Records updated successfully. Redirect to landing page
+                // Records updated successfully. Redirect back to edit page with success message
                  $_SESSION['status'] = "success";
                 $_SESSION['title'] = "Updated";
                 $_SESSION['message'] = "Users information updated successfully";
-                 echo "<script>window.open('registered-users', '_self')</script>";
+                 echo "<script>window.open('edit_user.php?id=$id', '_self')</script>";
             exit();
 
             } else{
@@ -91,9 +97,8 @@ if(isset($_POST["update"])) {
         // Close statement
         mysqli_stmt_close($stmt);
     }
-    
-    // Close connection
-    mysqli_close($dbconnected);
+
+    // Don't close connection here - it's needed for theme.php and other includes
 }else{
     // Check existence of id parameter before processing further
     if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
@@ -129,7 +134,12 @@ if(isset($_POST["update"])) {
                     $lname = $row["lname"];
                     $email = $row["email"];
                     $phone = $row["phone"];
-                    $country = $row["country"];
+                    $user_country = $row["country"];
+
+                    // Debug: Check what's in country
+                    error_log("DEBUG: Country from DB = [" . $country . "], Length: " . strlen($country) . ", Type: " . gettype($country));
+                    error_log("DEBUG: Row country = [" . $row["country"] . "]");
+
                     $city = $row["city"];
                     $zip_code = $row["zip_code"];
                     $address = $row["address"];

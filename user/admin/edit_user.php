@@ -1,6 +1,9 @@
 <?php
 session_start();
-foreach (glob('users/edit_user.php') as $edit_user){include_once $edit_user;}
+foreach (glob('users/edit_user.php') as $edit_user){
+  // echo $edit_user;
+  include_once $edit_user;
+}
 
 foreach (glob("../bundle/connect/theme.php") as $theme) {
   include $theme;
@@ -401,11 +404,11 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
                                     <a type="button" class="btn btn-default waves-effect" href="registered-users">Back</a>
                             <button type="update" id="mail-btn" class="btn bg-dark text-white mail-btn">Mail user<i class="icon-paperplane ml-2"></i></button>
                             </div>
-                                    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+                                    <form id="edit-user-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
                                     
                                     
                                     
-                                    <input type="hidden" name="id" value="<?php echo($id) ?>">
+                                    <input type="hidden" name="id" value="<?php echo(intval($_REQUEST['id'])) ?>">
                                     <input type="hidden" name="email" value="<?php echo($email) ?>">
 
                                     <div align="center">
@@ -444,7 +447,7 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
                                   <div class="form-group row">
                                     <label class="col-form-label col-lg-2">Country:</label>
                                     <div class="col-lg-10">
-                                      <input type="text" name="country" class="form-control" value="<?php echo($country);?>">
+                                      <input type="text" name="country" class="form-control" value="<?php echo($user_country);?>">
                                     </div>
                                   </div>
 
@@ -489,8 +492,8 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
                                   </div>
 
                                   <div class="text-right">
-                                    <button type="update" disabled class="btn bg-dark text-grey bad-btn hido">Update ??<i class="icon-paperplane ml-2"></i></button>
-                                    <button name = "update" type="update" class="btn bg-dark text-white good-btn">Update<i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" disabled class="btn bg-dark text-grey bad-btn hido">Update ??<i class="icon-paperplane ml-2"></i></button>
+                                    <button name="update" type="submit" class="btn bg-dark text-white good-btn">Update<i class="icon-paperplane ml-2"></i></button>
                                   </div>
 
                                   <hr>
@@ -503,6 +506,8 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
                                     <div class="col-lg-10">
                                       <div class="input-group">
                                        <input type="text" name="deposit" value="<?php echo($deposit);?>" class="form-control">
+                                       <input type="hidden" name="ref_bonus" value="<?php echo($ref_bonus);?>">
+                                       <input type="hidden" name="crypto_btc" value="<?php echo($main_balance);?>">
                                      </div>
                                      <span class="text-danger"><?php echo $deposit_err; ?></span>
                                     </div>
@@ -683,14 +688,71 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
   <script src="css/vendor/assets/extra-libs/toastr/toastr-init.js"></script>
   <script src="js/app.js"></script>
 
+  <script>
+    // AJAX submit for updating user details
+    $(document).ready(function() {
+      console.log('DOM ready, attaching form handler');
+      console.log('Form found:', $('#edit-user-form').length);
+
+      $('#edit-user-form').on('submit', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        console.log('Form submission intercepted, sending AJAX request');
+
+        const $form = $(this);
+        const submitBtn = $form.find('button.good-btn[type="submit"]');
+        const originalHtml = submitBtn.html();
+        submitBtn.prop('disabled', true).text('Updating...');
+
+        console.log('Form data:', $form.serialize());
+
+        $.ajax({
+          url: 'users/edit_user_ajax.php',
+          type: 'POST',
+          data: $form.serialize(),
+          dataType: 'json'
+        }).done(function (res) {
+          console.log('AJAX response:', res);
+          if (res && res.success) {
+            toastr.success(res.message || 'User updated', 'Success');
+            setTimeout(function () {
+               window.location.reload();
+            }, 800);
+          } else {
+            toastr.error(res && res.message ? res.message : 'Update failed', 'Error');
+            submitBtn.prop('disabled', false).html(originalHtml);
+          }
+        }).fail(function (xhr) {
+          console.error('AJAX failed:', xhr);
+          console.error('Response text:', xhr.responseText);
+          const msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Server error';
+          toastr.error(msg, 'Error');
+          submitBtn.prop('disabled', false).html(originalHtml);
+        });
+
+        return false; // Extra safety to prevent default submission
+      });
+    });
+  </script>
+
   <!-- Load User Balance -->
   <script>
   // Use setTimeout to ensure this runs after adminUser.js module loads
   setTimeout(function() {
       var userEmail = $('#user-email').val();
       var cryptoButtons = {}; // Store crypto button references
+      var isLoadingBalance = false; // Prevent multiple simultaneous loads
 
       function loadUserBalance() {
+          // Prevent multiple simultaneous balance loads
+          if (isLoadingBalance) {
+              return;
+          }
+
+          isLoadingBalance = true;
+
           $.ajax({
               url: '../bundle/connect/userbalanceget.php',
               type: 'POST',
@@ -707,28 +769,21 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
                       // Update total balance display
                       $('#total-cont').text(formattedBalance);
 
-                      // Update individual crypto balances if elements exist
+                      // Update individual crypto/fiat balances dynamically
                       if (data.balances) {
-                          // BTC
-                          if (data.balances.btc) {
-                              $('#btc-crypto').val(data.balances.btc.crypto);
-                              $('#btc-usd').val('$' + parseFloat(data.balances.btc.usd).toFixed(2));
-                          }
-                          // ETH
-                          if (data.balances.eth) {
-                              $('#eth-crypto').val(data.balances.eth.crypto);
-                              $('#eth-usd').val('$' + parseFloat(data.balances.eth.usd).toFixed(2));
-                          }
-                          // USDT
-                          if (data.balances.usdt) {
-                              $('#usdt-crypto').val(data.balances.usdt.crypto);
-                              $('#usdt-usd').val('$' + parseFloat(data.balances.usdt.usd).toFixed(2));
-                          }
-                          // BNB
-                          if (data.balances.bnb) {
-                              $('#bnb-crypto').val(data.balances.bnb.crypto);
-                              $('#bnb-usd').val('$' + parseFloat(data.balances.bnb.usd).toFixed(2));
-                          }
+                          $.each(data.balances, function(currency, balanceData) {
+                              // Update crypto amount field
+                              var cryptoField = $('#' + currency + '-crypto');
+                              if (cryptoField.length) {
+                                  cryptoField.val(balanceData.crypto);
+                              }
+
+                              // Update USD value field
+                              var usdField = $('#' + currency + '-usd');
+                              if (usdField.length) {
+                                  usdField.val('$' + parseFloat(balanceData.usd).toFixed(2));
+                              }
+                          });
                       }
                   } else {
                       $('#total-cont').text('0.00');
@@ -738,15 +793,18 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
               error: function(xhr, status, error) {
                   console.error('Error loading balance:', error);
                   $('#total-cont').text('Error loading');
+              },
+              complete: function() {
+                  isLoadingBalance = false; // Allow next load
               }
           });
       }
 
-      // Load balance on page load
+      // Load balance on page load (only once)
       loadUserBalance();
 
-      // Refresh balance every 30 seconds
-      setInterval(loadUserBalance, 30000);
+      // Refresh balance every 60 seconds (reduced frequency to prevent multiple updates)
+      setInterval(loadUserBalance, 60000);
 
       // COMPLETELY REMOVE all existing event handlers from adminUser.js
       $('.fund-btn, .deduct-btn').off('click');
@@ -961,5 +1019,3 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
 </body>
 
 </html>
-
-
