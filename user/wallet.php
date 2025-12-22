@@ -35,6 +35,19 @@ foreach (glob("bundle/dashboard/index.php") as $index) {
     <link href="../assets/plugins/apexcharts/apexcharts.css" rel="stylesheet" />
     <link href="../assets/css/pages/wallet-v1.css" rel="stylesheet" />
     <link href="<?php echo($style)?>" rel="stylesheet" />
+    <style>
+         .header.transparent {
+            padding: 0 !important;
+            position: relative !important;
+            width: 100%;
+            top: 0;
+            background-color: #141518 !important;
+            /* border-bottom: 1px solid #9295AB !important; */
+            border: 0;
+            left: 0;
+            z-index: 999;
+        }
+    </style>
 </head>
 
 <body class="">
