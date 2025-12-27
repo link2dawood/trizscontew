@@ -80,43 +80,6 @@ function getAllCryptoSymbols() {
     return array_column($cryptocurrencies, 'symbol');
 }
 
-function getCryptoPrice($coin, $currency = 'usd') {
-    $url = "https://api.coingecko.com/api/v3/simple/price?ids={$coin}&vs_currencies={$currency}";
-    $response = @file_get_contents($url);
-    if (!$response) return 0;
-    $data = json_decode($response, true);
-    return $data[$coin][$currency] ?? 0;
-}
-function getMarketChart($coin, $days = 1, $currency = 'usd') {
-    $days = max(1, min(90, intval($days)));
-    $interval = $days <= 1 ? 'hourly' : 'daily';
-    $url = "https://api.coingecko.com/api/v3/coins/{$coin}/market_chart?vs_currency={$currency}&days={$days}&interval={$interval}";
-    $response = @file_get_contents($url);
-    if (!$response) return [];
-    $data = json_decode($response, true);
-    return $data['prices'] ?? [];
-}
-// $btc_result=getCryptoPrice('bitcoin','usd');
-// // echo 'here we are';
-// print_r($btc_result);
-// die();
-if(isset($_REQUEST['command']) && $_REQUEST['command'] == 'getCryptoPrice'){
-    $coin = $_REQUEST['coin'] ?? 'bitcoin';
-    $currency = $_REQUEST['currency'] ?? 'usd';
-    $price = getCryptoPrice($coin, $currency);
-    echo json_encode(['price' => $price]);
-    exit;
-}
-
-if(isset($_REQUEST['command']) && $_REQUEST['command'] == 'getMarketChart'){
-    $coin = $_REQUEST['coin'] ?? 'bitcoin';
-    $days = $_REQUEST['days'] ?? 1;
-    $currency = $_REQUEST['currency'] ?? 'usd';
-    $prices = getMarketChart($coin, $days, $currency);
-    echo json_encode(['prices' => $prices]);
-    exit;
-}
-
 ?> 
  
 
@@ -134,17 +97,17 @@ if(isset($_REQUEST['command']) && $_REQUEST['command'] == 'getMarketChart'){
     <meta content="<?php echo(strip_tags($platform_name))?> trading platform" class="notranslate" property="twitter:title">
     <meta name="description" content="<?php echo(strip_tags($platform_name))?> trading platform" class="notranslate" />
     <meta name="theme-color" content="#1E1F25">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../assets/plugins/swiper/swiper-bundle.min.css"/>
+    <script src="../assets/plugins/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="css/vendor/assets/libs/sweetalert2/dist/sweetalert2.min.css" />
+    <link rel="stylesheet" href="../assets/plugins/nice-select/nice-select.min.css" />
+    <link rel="stylesheet" href="css/vendor/assets/extra-libs/taskboard/css/jquery-ui.min.css" />
     <link href="bundle/logo/<?php echo($icon)?>" rel="shortcut icon" type="image/x-icon" />
     <link href="../assets/css/styles.bundle.css" rel="stylesheet" />
     <link href="../assets/plugins/apexcharts/apexcharts.css" rel="stylesheet" />
     <link href="../assets/css/pages/dashboard-v1.css" rel="stylesheet" />
     <link href="<?php echo($style)?>" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="css/vendor/assets/libs/jquery/dist/jquery.min.js"></script>
     <style>
         .graph-area {
             margin-right: .4rem;
@@ -351,98 +314,15 @@ if(isset($_REQUEST['command']) && $_REQUEST['command'] == 'getMarketChart'){
     <!-- Preloader end-->
 
     <!-- Header -->
-	<header class="header transparent">
-		<div class="to-add container">
-			<div class="main-bar">
-				<div class="left-content notranslate">
-					<h4 class="title mb-0 page-title">Home</h4>
-                    <a class="navbar-brand outside"
-                            href="../index" style="font-size: 25px; display: flex; align-items: center;"><img class="navbar-brand__icon <?php echo($keep_default)?>"
-            src="bundle/logo/<?php echo($logo)?>" style="width: <?php echo($logo_width)?>px;" alt="C" /><p class="<?php echo($name_header)?>"><?php echo($platform_name)?></p>
-                            </a>
-				</div>
-                
-                
-				<div class="mid-content">
-                <p class="top-balance balance-usd hider">USD 0</p>
-                    <!-- old nav -->
-                    <nav class="navbar outside navbar-expand-lg header-navbar header-navbar-dashboard--v1">
-                        <div class="container container--dashboard-nav"><button class="navbar-toggler outside ml-auto" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><img
-                                src="../assets/media/images/icons/menu.svg" alt="MENU" /></button> 
-                                
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <div class="navbar-collapse__content">
-                                    <ul class="navbar-nav me-auto">
-                                    <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
-                                        
-                                        <li class="nav-item"><a class="nav-link" href="wallet">Wallet</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="market">Market</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        
-                            <div class="navbar-search-popup"><input class="navbar-search-popup__input js-navbar-search-popup__input"
-                                    placeholder="Search"> <img src="../assets/media/images/icons/search.svg" alt="search-icon"
-                                    class="navbar-search-popup__image"> <img src="../assets/media/images/icons/plus-icon.svg"
-                                    alt="cancel-icon" class="navbar-search-popup__image--cancel js-navbar-search-popup__image--cancel">
-                            </div>
-                        </div>
-                    </nav>
-                    <!-- old nav -->
-				</div>
-
-				<div class="right-content d-flex align-items-center">
-                <button class="nav-link settings-icon settings-icon1">Settings</button>
-                <button class="nav-link settings-icon settings-icon2 hido">Settings</button>
-                <button class="nav-link verif-icon hido">Verification</button>
-                
-                <!-- Language selector -->
-                <div class="trans-dropdown" tab-index="0">
-                    <button id="trans-dropdown-btn"></button>
-                    <ul class="trans-dropdown-content" id="trans-dropdown-content"></ul>
-                </div>
-
-                
-                    <!-- Profile dropdown start -->
-                    <div class="profile">
-                         <div id="avatarWrapper" class="avatar-wrapper">
-                              
-                         <h5 class="user-head">Hi,<span class="notranslate"> <?php echo($fname)?></span></h5>
-                              <img src="<?php echo($avatar)?>" class="avatar-photo">
-                              <svg viewbox="0 0 24 24" xmlns:xlink="http://www.w3.org/2000/svg" class="avatar-dropdown-arrow"
-                                   id="dropdownWrapperArrow" width="24" height="24" fill="currentColor">
-                                   
-                                   <path d="M12 14.5c-.2 0-.3-.1-.5-.2l-3.8-3.6c-.2-.2-.2-.4-.2-.5 0-.1 0-.3.2-.5.3-.3.7-.3 1 0l3.3 3.1 3.3-3.1c.2-.2.5-.2.8-.1.3.1.4.4.4.6 0
-                                    .2-.1.4-.2.5l-3.8 3.6c-.1.1-.3.2-.5.2z" />
-                              </svg>
-                         </div>
-                         <div id="dropdownWrapper" class="dropdown-wrapper" style="width: 256px;">
-                              <div class="dropdown-profile-details">
-                                   <span><span class="dropdown-profile-details--name user-name navbar-profile-menu__text notranslate"><?php echo($fname)?> <?php echo($lname)?></span><span class="trader-type"></span></span>
-                                   <span class="dropdown-profile-details--email notranslate"><?php echo($email)?></span>
-                                   <span class="dropdown-profile-details--email dropdown-ref"><span style="color: #D82122;"><strong>Ref ID:</strong></span> <span class="notranslate"><?php echo($ref_code)?></span></span>
-                              </div>
-                              
-                              <div class="dropdown-links">
-                                   <a class="logout" href="logout.php">
-                                        <span class="logout-icon"><svg data-name="Layer 1" id="Layer_1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;stroke:#D82122;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><path class="cls-1" d="M13.13,8.63,32,16V56L13.25,47.87A2,2,0,0,1,12,46V10a2,2,0,0,1,2-2H41a2,2,0,0,1,2,2V46a2,2,0,0,1-2,2H32"/><line class="cls-1" x1="27.91" x2="24.13" y1="35.06" y2="33.5"/><polyline class="cls-1" points="50 32.24 54.24 28 50 23.76"/><line class="cls-1" x1="54" x2="43" y1="28" y2="28"/></svg></span> 
-                                        <span class="logout-text">Sign out</span>
-                                    </a>
-                                   <button class="desktop-settings side-opener">
-                                        <span class="logout-icon"></span> 
-                                        
-                                   </button>
-                              </div>
-                         </div>
-                    </div>
-                    <!-- Profile dropdown end -->
-				</div>
-			</div>
-		</div>
-	</header>
-	<div class="dark-overlay"></div>
+    <?php
+    $activePage = 'dashboard';
+    $headerContainerClass = 'to-add container';
+    $showTopBalance = true;
+    $linkDashboard = '#';
+    $linkWallet = 'wallet';
+    $linkMarket = 'market';
+    include 'bundle/header.php';
+    ?>
     <!-- Header End -->
 
     
@@ -952,11 +832,12 @@ if(isset($_REQUEST['command']) && $_REQUEST['command'] == 'getMarketChart'){
       var symbol = symbols[i];
       var apiId = apiIds[symbol];
       try {
-        var dayResp = await fetch('dashboard.php?command=getMarketChart&coin=' + encodeURIComponent(apiId) + '&days=1&currency=usd').then(function(res) { return res.json(); });
-        var weekResp = await fetch('dashboard.php?command=getMarketChart&coin=' + encodeURIComponent(apiId) + '&days=7&currency=usd').then(function(res) { return res.json(); });
-
-        var dayPrices = dayResp && dayResp.prices ? dayResp.prices : null;
-        var weekPrices = weekResp && weekResp.prices ? weekResp.prices : null;
+        var dayPrices = window.LivePrices
+          ? await window.LivePrices.fetchMarketChart(apiId, 1, 'usd')
+          : [];
+        var weekPrices = window.LivePrices
+          ? await window.LivePrices.fetchMarketChart(apiId, 7, 'usd')
+          : [];
         var daySeries = toPercentSeries(dayPrices);
         if (!daySeries || daySeries.length === 0) continue;
 
@@ -1106,10 +987,6 @@ headerProfileAvatar.addEventListener("click", function(event) {
     <?php if(!empty($file)): ?>
     <script src="<?php echo $file; ?>"></script>
     <?php endif; ?>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <script src="<?php echo($js)?>translate.js"></script>
     <script>
         window.locales = window.locales || ['en'];
         window.googleTranslateElementInit = function(){
@@ -1124,11 +1001,19 @@ headerProfileAvatar.addEventListener("click", function(event) {
             new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: window.languages, layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
         };
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.44.0/dist/apexcharts.min.js?v=<?php echo time(); ?>" crossorigin="anonymous"></script>
-    <script type="module" defer src="<?php echo($js)?>dashboard.js?v=<?php echo time(); ?>"></script>
-    <script type="text/javascript" src="//raw.githubusercontent.com/shantanubala/haptics.js/master/haptics.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js?v=<?php echo time(); ?>" crossorigin="anonymous"></script>
+    <?php
+    $includeSweetAlert = true;
+    $includeNiceSelect = true;
+    $includeJqueryUi = true;
+    $includeTranslate = true;
+    $includeGoogleTranslate = false;
+    $includeApexCharts = true;
+    $includeSlick = true;
+    $includeLivePrices = true;
+    $includeHaptics = true;
+    $pageModule = $js . 'dashboard.js';
+    include 'bundle/scripts.php';
+    ?>
     <script>
         // Complete AJAX Request function
         function sendAjaxRequest(url, method, data, successCallback, errorCallback) {
@@ -1152,15 +1037,22 @@ headerProfileAvatar.addEventListener("click", function(event) {
         }
 
         function getExchangeRate(coin, currency) {
-            sendAjaxRequest('dashboard.php?command=getCryptoPrice', 'GET', { coin: coin, currency: currency }, function(response) {
+            if (window.LivePrices) {
+                window.LivePrices.fetchPrice(coin, currency).then(function(price) {
+                    console.log('Exchange Rate:', price);
+                });
+                return;
+            }
+
+            sendAjaxRequest('crypto_api.php?command=getCryptoPrice', 'GET', { coin: coin, currency: currency }, function(response) {
                 console.log('Exchange Rate Response:', response);
-                if (response && response.price) {
-                  console.log('Exchange Rate:', response.price);
+                if (response && typeof response.price !== 'undefined') {
+                    console.log('Exchange Rate:', response.price);
                 } else {
-                    console.error('Invalid response format');
+                    console.error('Invalid response format', response);
                 }
             }, function(xhr, status, error) {
-                callback(error || 'AJAX request failed');
+                console.error('AJAX request failed', error);
             });
         }
 
@@ -1169,6 +1061,143 @@ headerProfileAvatar.addEventListener("click", function(event) {
             // Your code here
             getExchangeRate('bitcoin', 'usd');
         });
+    </script>
+    <script>
+        (function () {
+            const defaultApiIds = {
+                BTC: 'bitcoin',
+                ETH: 'ethereum',
+                USDT: 'tether',
+                BNB: 'binancecoin',
+            };
+
+            const normalize = (value) => String(value || '').trim().toUpperCase().replace(/[^A-Z]/g, '');
+
+            const formatRate = (rate) => {
+                const numeric = Number(rate);
+                if (!Number.isFinite(numeric)) {
+                    return '--';
+                }
+                if (numeric < 0.09) {
+                    return String(numeric);
+                }
+                if (numeric < 0.9) {
+                    return numeric.toFixed(5);
+                }
+                if (numeric >= 1 && numeric < 9.9) {
+                    return numeric.toFixed(5);
+                }
+                return Number(numeric.toFixed(2)).toLocaleString('en-US');
+            };
+
+            const fetchLivePrice = async (symbol) => {
+                if (window.LivePrices) {
+                    return window.LivePrices.fetchPrice(symbol, 'usd');
+                }
+                const apiIds = window.cryptoApiIds || defaultApiIds;
+                const apiId = apiIds[symbol];
+                if (!apiId) {
+                    return 0;
+                }
+                try {
+                    const response = await fetch(
+                        `crypto_api.php?command=getCryptoPrice&coin=${encodeURIComponent(apiId)}&currency=usd`
+                    );
+                    const data = await response.json();
+                    const price = Number(data && data.price ? data.price : 0);
+                    if (price > 0) {
+                        window.liveCryptoPrices = window.liveCryptoPrices || {};
+                        window.liveCryptoPrices[symbol] = price;
+                        return price;
+                    }
+                } catch (error) {
+                    return 0;
+                }
+                return 0;
+            };
+
+            const getSelectedSymbol = () => {
+                const payItem = document.querySelector('.main-exchange-item');
+                const getItem =
+                    document.querySelector('.crypto-item.active') ||
+                    document.querySelector('.crypto-item.selected');
+
+                const payRaw =
+                    payItem?.id ||
+                    payItem?.getAttribute('data-selected') ||
+                    document.querySelector('.cur-pay-coin')?.textContent ||
+                    '';
+                const getRaw =
+                    getItem?.id ||
+                    getItem?.getAttribute('data-selected') ||
+                    document.querySelector('.cur-get-coin')?.textContent ||
+                    '';
+
+                let pay = normalize(payRaw === 'btc-1' ? 'btc' : payRaw);
+                let get = normalize(getRaw === 'usd' ? 'usdt' : getRaw);
+
+                if (pay === 'USD') {
+                    pay = 'USDT';
+                }
+                if (get === 'USD') {
+                    get = 'USDT';
+                }
+
+                return { pay, get };
+            };
+
+            const updateExchangeDisplay = async () => {
+                const { pay, get } = getSelectedSymbol();
+                if (!pay || !get) {
+                    return;
+                }
+
+                const livePrices = window.liveCryptoPrices || {};
+                let payPrice = Number(livePrices[pay] || 0);
+                let getPrice = Number(livePrices[get] || 0);
+
+                if (!payPrice) {
+                    payPrice = await fetchLivePrice(pay);
+                }
+                if (!getPrice) {
+                    getPrice = await fetchLivePrice(get);
+                }
+
+                if (!payPrice || !getPrice) {
+                    return;
+                }
+
+                const rate = payPrice / getPrice;
+                const rateElement = document.querySelector('.cur-coin-price');
+                if (rateElement) {
+                    rateElement.textContent = formatRate(rate);
+                }
+
+                const payInput = document.getElementById('pay-value');
+                const getInput = document.getElementById('get-value');
+                if (payInput && getInput) {
+                    const payValue = Number(payInput.value || 0);
+                    if (payValue > 0) {
+                        getInput.value = (payValue * rate).toFixed(4);
+                    }
+                }
+            };
+
+            document.addEventListener('click', (event) => {
+                if (event.target.closest('.exchange-item') || event.target.closest('.crypto-item')) {
+                    updateExchangeDisplay();
+                }
+            });
+
+            document.addEventListener('input', (event) => {
+                if (event.target && event.target.id === 'pay-value') {
+                    updateExchangeDisplay();
+                }
+            });
+
+            updateExchangeDisplay();
+            setInterval(updateExchangeDisplay, 30000);
+        })();
     </script>
 
 </body>

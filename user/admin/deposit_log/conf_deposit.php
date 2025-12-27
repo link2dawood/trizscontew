@@ -14,6 +14,7 @@ require '../../bundle/temp/short_mail2.php';
   $email = '';
   $coin = '';
   $value_raw = 0.0;
+  $crypto_amount = 0.0;
   $amount_display = '';
 
   if($depositStmt = mysqli_prepare($dbconnected, $depositSql)){
@@ -26,8 +27,9 @@ require '../../bundle/temp/short_mail2.php';
         $coinRaw = strtoupper(trim($depositRow['payment_mode']));
         $coinParts = preg_split('/\s+/', $coinRaw);
         $coin = isset($coinParts[0]) ? $coinParts[0] : '';
+        $crypto_amount = isset($coinParts[1]) ? (float)$coinParts[1] : 0.0;
         $value_raw = is_numeric($depositRow['amount']) ? (float)$depositRow['amount'] : 0.0;
-        $amount_display = $coin . ' ' . number_format($value_raw, 5, '.', '');
+        $amount_display = $coin . ' ' . number_format($crypto_amount, 5, '.', '');
       }
     }
     mysqli_stmt_close($depositStmt);
@@ -39,7 +41,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
   if (!empty($status) && !empty($id)) {
 
     // Guard against missing/invalid deposit data.
-    if ($email === '' || $coin === '' || $value_raw <= 0) {
+    if ($email === '' || $coin === '' || $value_raw <= 0 || $crypto_amount <= 0) {
       $_SESSION['status'] = "error";
       $_SESSION['title'] = "Error";
       $_SESSION['message'] = "Deposit details not found or invalid for this request.";
@@ -77,16 +79,16 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
     $value = '';
     if($coin == 'BTC') {
       $asset = 'crypto_btc';
-      $value = (float)$value_raw + (float)$btc;
+      $value = (float)$crypto_amount + (float)$btc;
     } elseif($coin == 'ETH') {
       $asset = 'crypto_eth';
-      $value = (float)$value_raw + (float)$eth;
+      $value = (float)$crypto_amount + (float)$eth;
     } elseif($coin == 'USDT') {
       $asset = 'crypto_usdt';
-      $value = (float)$value_raw + (float)$usdt;
+      $value = (float)$crypto_amount + (float)$usdt;
     } elseif($coin == 'BNB') {
       $asset = 'crypto_bnb';
-      $value = (float)$value_raw + (float)$bnb;
+      $value = (float)$crypto_amount + (float)$bnb;
     } else {
       $_SESSION['status'] = "error";
       $_SESSION['title'] = "Error";
@@ -145,7 +147,7 @@ if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
                   "<script type='module'>
                    import { getPlatformData, getRefData } from './ajax.js';
                   const userEmail = '$email';
-                  const amount = '$value_raw';
+                  const amount = '$crypto_amount';
                   const coin = '$coin';
                   const updateRef = async () => {
                     let res1;
