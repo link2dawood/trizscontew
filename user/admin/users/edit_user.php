@@ -135,6 +135,10 @@ if(isset($_POST["update"])) {
                     $email = $row["email"];
                     $phone = $row["phone"];
                     $user_country = $row["country"];
+                    $verif_status = "Not Verified";
+                    if($row["verif_status"]=='yes'){
+                        $verif_status = "Verified";
+                    }
 
                     // Debug: Check what's in country
                     error_log("DEBUG: Country from DB = [" . $country . "], Length: " . strlen($country) . ", Type: " . gettype($country));
@@ -142,7 +146,7 @@ if(isset($_POST["update"])) {
 
                     $city = $row["city"];
                     $zip_code = $row["zip_code"];
-                    $address = $row["address"];
+                    $user_address = $row["address"];
 
                     //FETCH USERS FINANCIAL RECORDS
                     $deposit = $row['profit'];

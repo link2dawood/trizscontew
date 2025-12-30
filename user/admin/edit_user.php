@@ -475,7 +475,7 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
                                     <label class="col-form-label col-lg-2">Address:</label>
                                     <div class="col-lg-10">
                                       <div class="input-group">
-                                       <input type="text" name="address" value="<?php echo($address);?>"
+                                       <input type="text" name="address" value="<?php echo($user_address);?>"
                                           class="form-control">
                                       </div>
                                     </div>
@@ -485,8 +485,8 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
                                     <label class="col-form-label col-lg-2">Verification status:</label>
                                     <div class="col-lg-10">
                                       <div class="input-group">
-                                       <input type="text" name="verif" id="verif"
-                                          class="form-control" readonly>
+                                       <input type="text" name="verif" id="verif" value=" <?php echo($verif_status);?> "
+                                          class="form-control" disabled>
                                       </div>
                                     </div>
                                   </div>
