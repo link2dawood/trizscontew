@@ -1,19 +1,38 @@
 <?php
+function isLocalhost() {
+    $host = strtolower($_SERVER['HTTP_HOST'] ?? '');
+    return $host === 'localhost' || $host === '127.0.0.1' || $host === '::1';
+}
+
 function fetchUrl($url) {
-    $response = @file_get_contents($url);
+    $verifySsl = !isLocalhost();
+    $context = stream_context_create([
+        'http' => [
+            'timeout' => 8,
+            'header' => "User-Agent: Mozilla/5.0\r\n",
+        ],
+        'ssl' => [
+            'verify_peer' => $verifySsl,
+            'verify_peer_name' => $verifySsl,
+        ],
+    ]);
+    $response = @file_get_contents($url, false, $context);
     if ($response !== false && $response !== '') {
         return $response;
     }
 
     if (function_exists('curl_init')) {
         $ch = curl_init();
+        $verifyHost = $verifySsl ? 2 : 0;
         curl_setopt_array($ch, [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_CONNECTTIMEOUT => 5,
             CURLOPT_TIMEOUT => 10,
-            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYPEER => $verifySsl,
+            CURLOPT_SSL_VERIFYHOST => $verifyHost,
+            CURLOPT_USERAGENT => 'Mozilla/5.0',
         ]);
         $response = curl_exec($ch);
         curl_close($ch);

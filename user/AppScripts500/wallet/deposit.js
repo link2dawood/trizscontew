@@ -26,10 +26,10 @@ if (walletDom?.adminWallet && walletDom.adminWallet !== ADMIN_WALLET_PLACEHOLDER
     const walletList = JSON.parse(walletDom.adminWallet);
     if (Array.isArray(walletList)) {
       walletList.forEach((item) => {
-        btcAdd = item?.bitcoin || btcAdd;
-        usdtAdd = item?.usdt || usdtAdd;
-        ethAdd = item?.ethereum || ethAdd;
-        bnbAdd = item?.bnb || bnbAdd;
+        btcAdd = item?.bitcoin || item?.btc || btcAdd;
+        usdtAdd = item?.usdt || item?.litecoin || usdtAdd;
+        ethAdd = item?.ethereum || item?.eth || ethAdd;
+        bnbAdd = item?.bnb || item?.bitcoin_cash || bnbAdd;
       });
     }
   } catch (error) {
@@ -352,6 +352,29 @@ const depositPayment = async (usdAmount, coin, prices) => {
 
 const paymentGateway = (payload) => {
   loader(100);
+  const hasPlatform = payload.walletAddState !== false;
+  const hasFlutterwave = walletDom.flutterwavePass !== 'no';
+  const hasCoinGate = walletDom.coingatePass !== 'no';
+  const hasCoinPayments = walletDom.coinpaymentsPass !== 'no';
+  const availableCount = [hasPlatform, hasFlutterwave, hasCoinGate, hasCoinPayments].filter(Boolean).length;
+
+  if (availableCount === 0) {
+    Alert.info('No payment methods available. Configure a wallet address or enable a gateway.', '', {
+      displayDuration: 5000,
+      pos: 'top',
+    });
+    const coinModal = document.querySelector('.coin-modal');
+    if (coinModal) {
+      walletDom.toggleScreen(coinModal, 'render');
+    }
+    return;
+  }
+
+  if (availableCount === 1 && hasPlatform) {
+    depositPayment(Number(payload.dollarAmount), payload.coin, payload);
+    return;
+  }
+
   const modalWrapper = createModalElement(`
   <div class="pop-modal gateway-modal hido" style="z-index: 7000000000000 !important;">
       <div class="advance-card modal-main">

@@ -1,1 +1,220 @@
-const _0x346df1=_0x1525;(function(_0x5c78e0,_0x1ada9a){const _0x13bbae=_0x1525,_0x9a2143=_0x5c78e0();while(!![]){try{const _0x40f8e5=parseInt(_0x13bbae(0x234))/0x1+parseInt(_0x13bbae(0x238))/0x2+-parseInt(_0x13bbae(0x1f9))/0x3*(parseInt(_0x13bbae(0x21d))/0x4)+-parseInt(_0x13bbae(0x236))/0x5+parseInt(_0x13bbae(0x22b))/0x6*(-parseInt(_0x13bbae(0x240))/0x7)+parseInt(_0x13bbae(0x21b))/0x8+-parseInt(_0x13bbae(0x23e))/0x9*(parseInt(_0x13bbae(0x207))/0xa);if(_0x40f8e5===_0x1ada9a)break;else _0x9a2143['push'](_0x9a2143['shift']());}catch(_0x2328f3){_0x9a2143['push'](_0x9a2143['shift']());}}}(_0x3bb3,0x25b43));import{getUserData,getWithdrawal}from'../ajax.js';import{withdraw}from'./withdraw.js';import{activityTracker}from'../activityTracker.js';import{loadChartData}from'../investment/growth.js';const assetsDiv=document[_0x346df1(0x1f6)]('.asset-div');export const preloader=document['getElementById'](_0x346df1(0x211));export const verifIcon=document['querySelectorAll']('.verif-icon');export const sideOpener=document['querySelectorAll']('.side-opener');export const depBtn=document[_0x346df1(0x231)](_0x346df1(0x1ee));export const withBtn=document['getElementById']('with-btn');export const loanBtn=document['getElementById'](_0x346df1(0x21c));export const dropDownRef=document[_0x346df1(0x1f6)](_0x346df1(0x235));export const balanceCont=document[_0x346df1(0x1f6)](_0x346df1(0x247));export const cryptoCont=document[_0x346df1(0x219)](_0x346df1(0x24a));export const balanceCrypto=document[_0x346df1(0x1f6)]('.balance-crypto');export const availBalanceCont=document[_0x346df1(0x219)](_0x346df1(0x1f8));export const availCryptoCont=document['querySelector'](_0x346df1(0x249));export const totalChangeCont=document['querySelectorAll'](_0x346df1(0x1fd));export const totalChangeMainCont=document['querySelector'](_0x346df1(0x208));export const changeArrow=document[_0x346df1(0x1f6)](_0x346df1(0x22a));function _0x1525(_0x2090c0,_0x4f60e6){const _0x3bb33f=_0x3bb3();return _0x1525=function(_0x1525b4,_0x24bb2e){_0x1525b4=_0x1525b4-0x1eb;let _0x50268f=_0x3bb33f[_0x1525b4];return _0x50268f;},_0x1525(_0x2090c0,_0x4f60e6);}export const pendReqAppend=document[_0x346df1(0x1f6)](_0x346df1(0x244));export const availBalBar=document[_0x346df1(0x1f6)](_0x346df1(0x201));export const fullNameCont=document[_0x346df1(0x1f6)](_0x346df1(0x232));export const platformName=document['querySelector'](_0x346df1(0x1fb))[_0x346df1(0x229)]['trim']();export const refPercent=document[_0x346df1(0x1f6)](_0x346df1(0x226))['innerHTML'][_0x346df1(0x212)]();export const refInstance=document[_0x346df1(0x1f6)]('.referral-instance')[_0x346df1(0x229)]['trim']();export const verifDep=document['querySelector']('.verif-dep')[_0x346df1(0x229)]['trim']();export const verifWithd=document[_0x346df1(0x1f6)](_0x346df1(0x23b))[_0x346df1(0x229)][_0x346df1(0x212)]();export const verifInv=document[_0x346df1(0x1f6)](_0x346df1(0x246))[_0x346df1(0x229)][_0x346df1(0x212)]();export const investmentPass=document[_0x346df1(0x1f6)](_0x346df1(0x205))[_0x346df1(0x229)][_0x346df1(0x212)]();export const loanPass=document[_0x346df1(0x1f6)](_0x346df1(0x20e))[_0x346df1(0x229)][_0x346df1(0x212)]();export const buysellPass=document['querySelector'](_0x346df1(0x20c))['innerHTML']['trim']();export const p2psendPass=document['querySelector'](_0x346df1(0x200))['innerHTML'][_0x346df1(0x212)]();export const coinpaymentsPass=document['querySelector'](_0x346df1(0x202))[_0x346df1(0x229)][_0x346df1(0x212)]();export const flutterwavePass=document[_0x346df1(0x1f6)](_0x346df1(0x1fe))['innerHTML'][_0x346df1(0x212)]();export const coingatePass=document['querySelector']('.coingate-pass')['innerHTML'][_0x346df1(0x212)]();export const brandUrl=document['querySelector'](_0x346df1(0x23d))['innerHTML'][_0x346df1(0x212)]();export const adminEmail=document[_0x346df1(0x1f6)](_0x346df1(0x248))[_0x346df1(0x229)]['trim']();export const userEmail=document['getElementById'](_0x346df1(0x1ef))[_0x346df1(0x229)][_0x346df1(0x212)]();export const userId=Number(document['getElementById'](_0x346df1(0x245))[_0x346df1(0x229)][_0x346df1(0x212)]());export const userPhone=document['getElementById'](_0x346df1(0x243))[_0x346df1(0x229)][_0x346df1(0x212)]();export const userFname=document[_0x346df1(0x231)](_0x346df1(0x1f2))[_0x346df1(0x229)][_0x346df1(0x212)]();export const userLname=document[_0x346df1(0x231)](_0x346df1(0x225))[_0x346df1(0x229)]['trim']();export const vComplete=document[_0x346df1(0x231)](_0x346df1(0x239))['innerHTML'][_0x346df1(0x212)]();export const vStatus=document['getElementById'](_0x346df1(0x23a))['innerHTML'][_0x346df1(0x212)]();export const userAccDetails=document[_0x346df1(0x231)](_0x346df1(0x21e))[_0x346df1(0x229)][_0x346df1(0x212)]()?document[_0x346df1(0x231)](_0x346df1(0x21e))['innerHTML'][_0x346df1(0x212)]():[];export const refEarnings=document[_0x346df1(0x231)](_0x346df1(0x22c))[_0x346df1(0x229)][_0x346df1(0x212)]()?document['getElementById'](_0x346df1(0x22c))[_0x346df1(0x229)][_0x346df1(0x212)]():[];export const refCode=document['getElementById'](_0x346df1(0x220))[_0x346df1(0x229)][_0x346df1(0x212)]();export const adminWallet=document['getElementById'](_0x346df1(0x20d))[_0x346df1(0x229)]['trim']()?document[_0x346df1(0x231)](_0x346df1(0x20d))[_0x346df1(0x229)][_0x346df1(0x212)]():[];export const currencyCode=document['getElementById'](_0x346df1(0x22d))[_0x346df1(0x229)][_0x346df1(0x212)]()?document[_0x346df1(0x231)](_0x346df1(0x22d))[_0x346df1(0x229)][_0x346df1(0x212)]():_0x346df1(0x1ec);export const toScreenshot=document[_0x346df1(0x231)]('screen')[_0x346df1(0x229)][_0x346df1(0x212)]()?document['getElementById'](_0x346df1(0x216))['innerHTML'][_0x346df1(0x212)]():'none';export const page=_0x346df1(0x230);export const toggleScreen=(_0xa6bdd5,_0x54d91d)=>{const _0x56fa9a=_0x346df1;if(_0x54d91d===_0x56fa9a(0x241))_0xa6bdd5[_0x56fa9a(0x23c)][_0x56fa9a(0x1f7)]('go'),setTimeout(()=>{const _0x3f3a49=_0x56fa9a;_0xa6bdd5[_0x3f3a49(0x23c)][_0x3f3a49(0x209)](_0x3f3a49(0x1fc));},0x3e8);else _0x54d91d===_0x56fa9a(0x214)&&(_0xa6bdd5['classList'][_0x56fa9a(0x1f7)]('hido'),setTimeout(()=>{const _0x5b67cd=_0x56fa9a;_0xa6bdd5[_0x5b67cd(0x23c)][_0x5b67cd(0x209)]('go');},0x3e8));};function _0x3bb3(){const _0x2ebaf0=['forEach','7ZuVRnJ','fade','split','user_phone','.pend-req-append','user_id','.verif-inv','.balance-cont','.admin-support','.avail-crypto-cont','.crypto-cont','length','text-bullish','USD','filter','dep-btn','user_email','</div>','none','user_fname','currency','Pending','indexOf','querySelector','remove','.avail-balance-cont','972sbXHMg','curSymbol','.platform-name','hido','.total-change','.flutterwave-pass','value','.p2psend-pass','.avail-bal-bar','.coinpayments-pass','map','myCryptoAssets','.investment-pass','../assets/media/images/icons/red-arrow-down.svg','54050eFmCJS','.total-change-main','add','currencyValue','yes','.buysell-pass','admin_wallet','.loan-pass','toFixed','\x22\x20alt=\x22\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22standard-card__content-currency-icon\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22standard-card__content-currency-name\x22>','preloader','trim','sort','render','text-bearish','screen','toLocaleString','change','querySelectorAll','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22standard-card__content-price-2\x20','263000JASuSS','loan-btn','292pAZIRl','user_account_detail','lname','ref_code','%</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22standard-card__content-price-1\x20','display','curValue','reduce','user_lname','.referral-percent','find','blurers','innerHTML','.change-arrow','17562oTTsJE','referral_earnings','currency_code','src','pos','wallet','getElementById','.navbar-profile-menu__text','shortname','104747sqVaLG','.dropdown-ref','384700uReIBb','../assets/media/images/icons/green-arrow-up.svg','294714kOGzTg','verif_complete','verif_status','.verif-withd','classList','.end_detail','45IviMJA'];_0x3bb3=function(){return _0x2ebaf0;};return _0x3bb3();}export const formatFigure=_0x22c911=>{const _0x45080a=_0x346df1;return Number(_0x22c911[_0x45080a(0x20f)](0x2))[_0x45080a(0x217)]('en-US');};const reDisplayDefaults=_0x329d41=>displayDefaults(_0x329d41);export const init=_0x476e07=>{const _0x4222c9=_0x346df1;_0x476e07==='yes'?(availBalanceCont['forEach'](_0x372cd9=>{const _0x546413=_0x1525;_0x372cd9[_0x546413(0x23c)][_0x546413(0x209)](_0x546413(0x228));}),cryptoCont[_0x4222c9(0x23f)](_0x17507d=>{const _0x2fc6cf=_0x4222c9;_0x17507d['classList'][_0x2fc6cf(0x209)]('blurers');}),balanceCont[_0x4222c9(0x23c)][_0x4222c9(0x209)](_0x4222c9(0x228)),availCryptoCont[_0x4222c9(0x23c)][_0x4222c9(0x209)](_0x4222c9(0x228))):(availBalanceCont[_0x4222c9(0x23f)](_0x5594c4=>{const _0x11b41a=_0x4222c9;_0x5594c4['classList'][_0x11b41a(0x1f7)](_0x11b41a(0x228));}),cryptoCont[_0x4222c9(0x23f)](_0x45aa96=>{const _0x761a7e=_0x4222c9;_0x45aa96[_0x761a7e(0x23c)][_0x761a7e(0x1f7)](_0x761a7e(0x228));}),balanceCont['classList']['remove']('blurers'),availCryptoCont[_0x4222c9(0x23c)][_0x4222c9(0x1f7)](_0x4222c9(0x228)));;reDisplayDefaults(_0x476e07);};export const displayDefaults=async _0x3fd631=>{const _0x38737e=_0x346df1;preloader['style'][_0x38737e(0x222)]=_0x38737e(0x1f1),preloader['classList'][_0x38737e(0x209)](_0x38737e(0x1fc));const _0xe4451d=await getUserData(userEmail),[_0x37e0e9,_0x2010bc,_0x5313e8,_0x20cfc4,_0x57c09a,_0x527cc6,_0x1de1e9,_0x452acf,_0x45750d,_0x6e69df,_0x3750c3,_0x14987b,_0x5276b0]=loadChartData({'userEmail':userEmail,'userId':userId},_0xe4451d);refPercent==='0'?dropDownRef['classList']['add'](_0x38737e(0x1fc)):dropDownRef[_0x38737e(0x23c)]['remove']('hido');;const _0x2be774=_0xe4451d[_0x38737e(0x204)],_0x420bae=await getWithdrawal(userEmail),_0x4204b4=_0x420bae?_0x420bae:[],_0x3d65c1=_0x4204b4['filter'](_0x934492=>_0x934492[0x4]===_0x38737e(0x1f4)),_0x59e08a=_0x2be774['map'](_0x18e1ee=>{return{..._0x18e1ee};});if(_0x3d65c1?.[_0x38737e(0x24b)]>0x0){const _0x2094c9=_0x3d65c1[0x0][0x2],[_0x34b5e3,_0x4f45ac]=_0x2094c9[_0x38737e(0x242)]('\x20'),_0x3efa11=_0x59e08a[_0x38737e(0x227)](_0x425631=>_0x425631['shortname']===_0x34b5e3),_0xb5bd20=_0x59e08a[_0x38737e(0x1f5)](_0x3efa11),_0x3b471a=Number(_0x59e08a[_0xb5bd20][_0x38737e(0x1ff)])-Number(_0x4f45ac);_0x59e08a[_0xb5bd20]['value']=Number(_0x3b471a),_0x59e08a[_0xb5bd20][_0x38737e(0x20a)]=Number(_0x3b471a)*Number(_0x59e08a[_0xb5bd20]['price'])*_0xe4451d[_0x38737e(0x223)];};const _0x2cb3bf=_0x2be774[_0x38737e(0x1ed)](_0xa3901b=>_0xa3901b['value']!==0x0),_0x50840d=_0x59e08a[_0x38737e(0x1ed)](_0x2e5623=>_0x2e5623[_0x38737e(0x1ff)]!==0x0);let _0x3be0b0=[];_0x50840d[_0x38737e(0x24b)]>0x0&&(_0x50840d['forEach']((_0x3c3184,_0x41f2a9)=>{const _0x35a837=_0x38737e;let _0x5d0cb0;_0x3fd631===_0x35a837(0x20b)?_0x5d0cb0=_0x35a837(0x228):_0x5d0cb0='';;let _0x53a6d5;_0x3c3184[_0x35a837(0x22f)]===!![]?_0x53a6d5='bullish':_0x53a6d5='bearish';;_0x3be0b0[_0x41f2a9]='\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card\x20standard-card--type-6-v1\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card__content\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card__content-head\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card__content-currency\x22><img\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20src=\x22'+_0x3c3184['img']+_0x35a837(0x210)+_0x3c3184[_0x35a837(0x233)]+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22standard-card__content-percentage\x20text-'+_0x53a6d5+'\x22>'+_0x3c3184[_0x35a837(0x218)]+_0x35a837(0x221)+_0x5d0cb0+'\x22>'+_0x3c3184[_0x35a837(0x1ff)][_0x35a837(0x20f)](0x5)+_0x35a837(0x21a)+_0x5d0cb0+'\x22>'+_0xe4451d[_0x35a837(0x1fa)]+formatFigure(_0x3c3184[_0x35a837(0x20a)])+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card__content-chart-wrapper\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22standard-card__content-chart-7\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22standard-card__content-chart-render\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20';}),assetsDiv['innerHTML']=_0x3be0b0['join'](_0x38737e(0x1f0)));;if(_0x50840d&&_0x50840d?.[_0x38737e(0x24b)]>0x0){const _0x20ba90=_0x50840d[_0x38737e(0x203)](_0x31d093=>_0x31d093?.[_0x38737e(0x20a)])['reduce']((_0x598a0b,_0x4df797)=>_0x598a0b+_0x4df797),_0x153ca7=_0x2cb3bf[_0x38737e(0x203)](_0x17bf6f=>_0x17bf6f?.['currencyValue'])['reduce']((_0x3af880,_0x22797b)=>_0x3af880+_0x22797b);availBalanceCont[_0x38737e(0x23f)](_0x5b0e4d=>{const _0xcbffa6=_0x38737e;_0x5b0e4d[_0xcbffa6(0x229)]=formatFigure(_0x20ba90)+'\x20'+_0xe4451d[_0xcbffa6(0x1f3)];}),balanceCont[_0x38737e(0x229)]=formatFigure(_0x153ca7)+'\x20'+_0xe4451d[_0x38737e(0x1f3)];const _0x3bec94=_0x50840d[_0x38737e(0x203)](_0x5df753=>_0x5df753?.[_0x38737e(0x218)])[_0x38737e(0x224)]((_0x36cff7,_0x55fddd)=>_0x36cff7+_0x55fddd),_0xfee211=_0x50840d[_0x38737e(0x213)]((_0x10137b,_0x235d9a)=>_0x235d9a[_0x38737e(0x218)]-_0x10137b[_0x38737e(0x218)]),_0xd18cce=_0xfee211['splice'](0x0,0x1),_0xde26b9=_0xd18cce[0x0]['pos'];let _0x636f10;_0xde26b9===!![]?_0x636f10='+':_0x636f10='-';;totalChangeCont[_0x38737e(0x23f)](_0x37c740=>{const _0x2370fc=_0x38737e;_0x37c740[_0x2370fc(0x229)]=''+_0x636f10+Number(_0x3bec94)[_0x2370fc(0x20f)](0x2)+'%';}),changeArrow[_0x38737e(0x23c)]['remove'](_0x38737e(0x1fc));_0xde26b9===!![]?(totalChangeMainCont['classList'][_0x38737e(0x209)](_0x38737e(0x1eb)),changeArrow[_0x38737e(0x22e)]=_0x38737e(0x237)):(totalChangeMainCont[_0x38737e(0x23c)][_0x38737e(0x209)](_0x38737e(0x215)),changeArrow[_0x38737e(0x22e)]=_0x38737e(0x206));;totalChangeMainCont[_0x38737e(0x229)]=Number(_0x3bec94)[_0x38737e(0x20f)](0x2)+'%';};fullNameCont[_0x38737e(0x229)]=_0xe4451d['fname']+'\x20'+_0xe4451d[_0x38737e(0x21f)],activityTracker({'page':page,'userEmail':userEmail,'userId':userId,'formatFigure':formatFigure,'toggleScreen':toggleScreen,'toScreenshot':_0x3fd631},_0xe4451d);};export const withdrawWallet=async _0x101d4c=>{withdraw(_0x101d4c);};
+import {
+  getUserData,getWithdrawal
+}
+from'../ajax.js';
+import {
+  withdraw
+}
+from'./withdraw.js';
+import {
+  activityTracker
+}
+from'../activityTracker.js';
+import {
+  loadChartData
+}
+from'../investment/growth.js';
+const assetsDiv=document["querySelector"]('.asset-div');
+export const preloader=document['getElementById']("preloader");
+export const verifIcon=document['querySelectorAll']('.verif-icon');
+export const sideOpener=document['querySelectorAll']('.side-opener');
+export const depBtn=document["getElementById"]("dep-btn");
+export const withBtn=document['getElementById']('with-btn');
+export const loanBtn=document['getElementById']("loan-btn");
+export const dropDownRef=document["querySelector"](".dropdown-ref");
+export const balanceCont=document["querySelector"](".balance-cont");
+export const cryptoCont=document["querySelectorAll"](".crypto-cont");
+export const balanceCrypto=document["querySelector"]('.balance-crypto');
+export const availBalanceCont=document["querySelectorAll"](".avail-balance-cont");
+export const availCryptoCont=document['querySelector'](".avail-crypto-cont");
+export const totalChangeCont=document['querySelectorAll'](".total-change");
+export const totalChangeMainCont=document['querySelector'](".total-change-main");
+export const changeArrow=document["querySelector"](".change-arrow");
+export const pendReqAppend=document["querySelector"](".pend-req-append");
+export const availBalBar=document["querySelector"](".avail-bal-bar");
+export const fullNameCont=document["querySelector"](".navbar-profile-menu__text");
+export const platformName=document['querySelector'](".platform-name")["innerHTML"]['trim']();
+export const refPercent=document["querySelector"](".referral-percent")['innerHTML']["trim"]();
+export const refInstance=document["querySelector"]('.referral-instance')["innerHTML"]['trim']();
+export const verifDep=document['querySelector']('.verif-dep')["innerHTML"]['trim']();
+export const verifWithd=document["querySelector"](".verif-withd")["innerHTML"]["trim"]();
+export const verifInv=document["querySelector"](".verif-inv")["innerHTML"]["trim"]();
+export const investmentPass=document["querySelector"](".investment-pass")["innerHTML"]["trim"]();
+export const loanPass=document["querySelector"](".loan-pass")["innerHTML"]["trim"]();
+export const buysellPass=document['querySelector'](".buysell-pass")['innerHTML']['trim']();
+export const p2psendPass=document['querySelector'](".p2psend-pass")['innerHTML']["trim"]();
+export const coinpaymentsPass=document['querySelector'](".coinpayments-pass")["innerHTML"]["trim"]();
+export const flutterwavePass=document["querySelector"](".flutterwave-pass")['innerHTML']["trim"]();
+export const coingatePass=document['querySelector']('.coingate-pass')['innerHTML']["trim"]();
+export const brandUrl=document['querySelector'](".end_detail")['innerHTML']["trim"]();
+export const adminEmail=document["querySelector"](".admin-support")["innerHTML"]['trim']();
+export const userEmail=document['getElementById']("user_email")["innerHTML"]["trim"]();
+export const userId=Number(document['getElementById']("user_id")["innerHTML"]["trim"]());
+export const userPhone=document['getElementById']("user_phone")["innerHTML"]["trim"]();
+export const userFname=document["getElementById"]("user_fname")["innerHTML"]["trim"]();
+export const userLname=document["getElementById"]("user_lname")["innerHTML"]['trim']();
+export const vComplete=document["getElementById"]("verif_complete")['innerHTML']["trim"]();
+export const vStatus=document['getElementById']("verif_status")['innerHTML']["trim"]();
+export const userAccDetails=document["getElementById"]("user_account_detail")["innerHTML"]["trim"]()?document["getElementById"]("user_account_detail")['innerHTML']["trim"]():[];
+export const refEarnings=document["getElementById"]("referral_earnings")["innerHTML"]["trim"]()?document['getElementById']("referral_earnings")["innerHTML"]["trim"]():[];
+export const refCode=document['getElementById']("ref_code")["innerHTML"]["trim"]();
+export const adminWallet=document['getElementById']("admin_wallet")["innerHTML"]['trim']()?document["getElementById"]("admin_wallet")["innerHTML"]["trim"]():[];
+export const currencyCode=document['getElementById']("currency_code")["innerHTML"]["trim"]()?document["getElementById"]("currency_code")["innerHTML"]["trim"]():"USD";
+export const toScreenshot=document["getElementById"]('screen')["innerHTML"]["trim"]()?document['getElementById']("screen")['innerHTML']["trim"]():'none';
+export const page="wallet";
+export const toggleScreen=(_0xa6bdd5,_0x54d91d)=> {
+  if(_0x54d91d==="fade")_0xa6bdd5["classList"]["remove"]('go'),setTimeout(()=> {
+    _0xa6bdd5["classList"]["add"]("hido");
+    
+  }
+  ,0x3e8);
+  else _0x54d91d==="render"&&(_0xa6bdd5['classList']["remove"]('hido'),setTimeout(()=> {
+    _0xa6bdd5["classList"]["add"]('go');
+    
+  }
+  ,0x3e8));
+  
+};
+export const formatFigure=_0x22c911=> {
+  return Number(_0x22c911["toFixed"](0x2))["toLocaleString"]('en-US');
+  
+};
+const defaultAssetSymbols=['BTC','ETH','USDT','BNB'];
+const normalizeSymbol=_0x2f28bb=>String(_0x2f28bb||'')['trim']()["toUpperCase"]()['replace'](/[^A-Z]/g,'');
+const getAssetSymbols=()=> {
+  const _0x12b7d9=Array['isArray'](window.cryptoSymbols)?window.cryptoSymbols:[];
+  if(_0x12b7d9["length"]>0x0)return _0x12b7d9['map'](normalizeSymbol)["filter"](_0x3887bb=>_0x3887bb);
+  const _0x51bc98=window.cryptoApiIds||{},_0x259fab=Object["keys"](_0x51bc98)["map"](normalizeSymbol)["filter"](_0x3887bb=>_0x3887bb);
+  if(_0x259fab["length"]>0x0)return _0x259fab;
+  return defaultAssetSymbols;
+  
+};
+const buildAssetMap=_0x5bde34=> {
+  const _0x241a4c={};
+  (Array['isArray'](_0x5bde34)?_0x5bde34:[])['forEach'](_0x26a4d1=> {
+    const _0x4d4f72=normalizeSymbol(_0x26a4d1?.["shortname"]);
+    _0x4d4f72&&(_0x241a4c[_0x4d4f72]=_0x26a4d1);
+    
+  }
+  );
+  return _0x241a4c;
+  
+};
+const buildCryptoMap=_0x2d814e=> {
+  const _0x32c36d={};
+  (Array['isArray'](_0x2d814e)?_0x2d814e:[])["forEach"](_0x5bd581=> {
+    const _0x3221b2=normalizeSymbol(_0x5bd581?.["coincode"]||_0x5bd581?.["coin"]);
+    _0x3221b2&&(_0x32c36d[_0x3221b2]=_0x5bd581);
+    
+  }
+  );
+  return _0x32c36d;
+  
+};
+const getAssetIcon=(_0x21260a,_0x57e4a7)=> {
+  const _0x52bf9a=window.cryptoIcons||{};
+  return _0x52bf9a[_0x21260a]||_0x57e4a7||'';
+  
+};
+const toBoolean=_0x42b2a1=>_0x42b2a1===!![]||_0x42b2a1===0x1||_0x42b2a1==='1';
+const buildAssetList=(_0x4f9f0c,_0x3f0e9d,_0x28c113)=> {
+  return (_0x28c113||[])['map'](_0x4cc125=> {
+    const _0x57c8e8=_0x4f9f0c[_0x4cc125]||{},_0x29d0bf=_0x3f0e9d[_0x4cc125]||{},_0x4a2b6a=Number(_0x57c8e8["value"]||0x0),_0x2d0dc4=Number(_0x57c8e8["price"]||_0x29d0bf["price"]||0x0),_0x2c9a95=Number(_0x57c8e8["currencyValue"]||_0x4a2b6a*_0x2d0dc4),_0x4c7e4e=typeof _0x57c8e8["change"]!=='undefined'?_0x57c8e8["change"]:_0x29d0bf["change1hr"]||0x0,_0x48b3da=typeof _0x57c8e8["pos"]!=='undefined'?_0x57c8e8["pos"]:_0x29d0bf["changePos"]||0x0;
+    return {
+      ..._0x57c8e8,
+      'name':_0x57c8e8["name"]||_0x29d0bf["coin"]||_0x4cc125,'shortname':_0x4cc125,'value':_0x4a2b6a,'price':_0x2d0dc4,'currencyValue':_0x2c9a95,'change':Number(_0x4c7e4e||0x0),'pos':toBoolean(_0x48b3da),'img':getAssetIcon(_0x4cc125,_0x57c8e8["img"]||_0x29d0bf["coinimage"]||'')
+    };
+    
+  }
+  );
+  
+};
+const reDisplayDefaults=_0x329d41=>displayDefaults(_0x329d41);
+export const init=_0x476e07=> {
+  _0x476e07==='yes'?(availBalanceCont['forEach'](_0x372cd9=> {
+    _0x372cd9["classList"]["add"]("blurers");
+    
+  }
+  ),cryptoCont["forEach"](_0x17507d=> {
+    _0x17507d['classList']["add"]('blurers');
+    
+  }
+  ),balanceCont["classList"]["add"]("blurers"),availCryptoCont["classList"]["add"]("blurers")):(availBalanceCont["forEach"](_0x5594c4=> {
+    _0x5594c4['classList']["remove"]("blurers");
+    
+  }
+  ),cryptoCont["forEach"](_0x45aa96=> {
+    _0x45aa96["classList"]["remove"]("blurers");
+    
+  }
+  ),balanceCont['classList']['remove']('blurers'),availCryptoCont["classList"]["remove"]("blurers"));
+  ;
+  reDisplayDefaults(_0x476e07);
+  
+};
+export const displayDefaults=async _0x3fd631=> {
+  preloader['style']["display"]="none",preloader['classList']["add"]("hido");
+  const _0xe4451d=await getUserData(userEmail),[_0x37e0e9,_0x2010bc,_0x5313e8,_0x20cfc4,_0x57c09a,_0x527cc6,_0x1de1e9,_0x452acf,_0x45750d,_0x6e69df,_0x3750c3,_0x14987b,_0x5276b0]=loadChartData( {
+    'userEmail':userEmail,'userId':userId
+  }
+  ,_0xe4451d);
+  refPercent==='0'?dropDownRef['classList']['add']("hido"):dropDownRef["classList"]['remove']('hido');
+  ;
+  const _0x2be774=_0xe4451d["myCryptoAssets"],_0x420bae=await getWithdrawal(userEmail),_0x4204b4=_0x420bae?_0x420bae:[],_0x3d65c1=_0x4204b4['filter'](_0x934492=>_0x934492[0x4]==="Pending"),_0x59e08a=_0x2be774['map'](_0x18e1ee=> {
+    return {
+      ..._0x18e1ee
+    };
+    
+  }
+  );
+  if(_0x3d65c1?.["length"]>0x0) {
+    const _0x2094c9=_0x3d65c1[0x0][0x2],[_0x34b5e3,_0x4f45ac]=_0x2094c9["split"]('\x20'),_0x3efa11=_0x59e08a["find"](_0x425631=>_0x425631['shortname']===_0x34b5e3),_0xb5bd20=_0x59e08a["indexOf"](_0x3efa11),_0x3b471a=Number(_0x59e08a[_0xb5bd20]["value"])-Number(_0x4f45ac);
+    _0x59e08a[_0xb5bd20]['value']=Number(_0x3b471a),_0x59e08a[_0xb5bd20]["currencyValue"]=Number(_0x3b471a)*Number(_0x59e08a[_0xb5bd20]['price'])*_0xe4451d["curValue"];
+    
+  };
+  const _0x4c1f92=buildAssetMap(_0x2be774),_0x5b8f83=buildAssetMap(_0x59e08a),_0x1a4a47=buildCryptoMap(_0xe4451d["crypto"]),_0x22a5a9=getAssetSymbols(),_0x1c4c3b=buildAssetList(_0x5b8f83,_0x1a4a47,_0x22a5a9),_0x2cb3bf=buildAssetList(_0x4c1f92,_0x1a4a47,_0x22a5a9)["filter"](_0xa3901b=>_0xa3901b['value']!==0x0),_0x50840d=_0x1c4c3b["filter"](_0x2e5623=>_0x2e5623["value"]!==0x0);
+  let _0x3be0b0=[];
+  _0x1c4c3b["length"]>0x0&&(_0x1c4c3b['forEach']((_0x3c3184,_0x41f2a9)=> {
+    let _0x5d0cb0;
+    _0x3fd631==="yes"?_0x5d0cb0="blurers":_0x5d0cb0='';
+    ;
+    let _0x53a6d5;
+    _0x3c3184["pos"]===!![]?_0x53a6d5='bullish':_0x53a6d5='bearish';
+    ;
+    _0x3be0b0[_0x41f2a9]='\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card\x20standard-card--type-6-v1\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22container\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card__content\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card__content-head\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card__content-currency\x22><img\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20src=\x22'+_0x3c3184['img']+"\" alt=\"\"\n                              class=\"standard-card__content-currency-icon\">\n                          <p class=\"standard-card__content-currency-name\">"+_0x3c3184["shortname"]+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22standard-card__content-percentage\x20text-'+_0x53a6d5+'\x22>'+_0x3c3184["change"]+"%</p>\n                  </div>\n                  <p class=\"standard-card__content-price-1 "+_0x5d0cb0+'\x22>'+_0x3c3184["value"]["toFixed"](0x5)+"</p>\n                  <p class=\"standard-card__content-price-2 "+_0x5d0cb0+'\x22>'+_0xe4451d["curSymbol"]+formatFigure(_0x3c3184["currencyValue"])+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22standard-card__content-chart-wrapper\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22standard-card__content-chart-7\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22standard-card__content-chart-render\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20';
+    
+  }
+  ),assetsDiv['innerHTML']=_0x3be0b0['join']("</div>"));
+  ;
+  if(_0x50840d&&_0x50840d?.["length"]>0x0) {
+    const _0x20ba90=_0x50840d["map"](_0x31d093=>_0x31d093?.["currencyValue"])['reduce']((_0x598a0b,_0x4df797)=>_0x598a0b+_0x4df797),_0x153ca7=_0x2cb3bf["map"](_0x17bf6f=>_0x17bf6f?.['currencyValue'])['reduce']((_0x3af880,_0x22797b)=>_0x3af880+_0x22797b);
+    availBalanceCont["forEach"](_0x5b0e4d=> {
+      _0x5b0e4d["innerHTML"]=formatFigure(_0x20ba90)+'\x20'+_0xe4451d["currency"];
+      
+    }
+    ),balanceCont["innerHTML"]=formatFigure(_0x153ca7)+'\x20'+_0xe4451d["currency"];
+    const _0x3bec94=_0x50840d["map"](_0x5df753=>_0x5df753?.["change"])["reduce"]((_0x36cff7,_0x55fddd)=>_0x36cff7+_0x55fddd),_0xfee211=_0x50840d["sort"]((_0x10137b,_0x235d9a)=>_0x235d9a["change"]-_0x10137b["change"]),_0xd18cce=_0xfee211['splice'](0x0,0x1),_0xde26b9=_0xd18cce[0x0]['pos'];
+    let _0x636f10;
+    _0xde26b9===!![]?_0x636f10='+':_0x636f10='-';
+    ;
+    totalChangeCont["forEach"](_0x37c740=> {
+      _0x37c740["innerHTML"]=''+_0x636f10+Number(_0x3bec94)["toFixed"](0x2)+'%';
+      
+    }
+    ),changeArrow["classList"]['remove']("hido");
+    _0xde26b9===!![]?(totalChangeMainCont['classList']["add"]("text-bullish"),changeArrow["src"]="../assets/media/images/icons/green-arrow-up.svg"):(totalChangeMainCont["classList"]["add"]("text-bearish"),changeArrow["src"]="../assets/media/images/icons/red-arrow-down.svg");
+    ;
+    totalChangeMainCont["innerHTML"]=Number(_0x3bec94)["toFixed"](0x2)+'%';
+    
+  };
+  fullNameCont["innerHTML"]=_0xe4451d['fname']+'\x20'+_0xe4451d["lname"],activityTracker( {
+    'page':page,'userEmail':userEmail,'userId':userId,'formatFigure':formatFigure,'toggleScreen':toggleScreen,'toScreenshot':_0x3fd631
+  }
+  ,_0xe4451d);
+  
+};
+export const withdrawWallet=async _0x101d4c=> {
+  withdraw(_0x101d4c);
+  
+};
+
