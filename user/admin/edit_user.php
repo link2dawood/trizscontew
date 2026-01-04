@@ -661,7 +661,7 @@ foreach (glob("../bundle/connect/platform.php") as $platform) {
 
 
 
-  <script type="module" defer src="<?php echo($js)?>adminUser.js"></script>
+  <script type="module" defer src="<?php echo($js)?>adminUser.js?v=<?php echo filemtime(__DIR__ . '/../AppScripts500/adminUser.js'); ?>"></script>
   <script src="css/vendor/assets/libs/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap tether Core JavaScript -->
   <script src="css/vendor/assets/libs/popper.js/dist/umd/popper.min.js"></script>

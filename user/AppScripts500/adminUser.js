@@ -61,6 +61,30 @@ const btcConv=document[_0x52b594(0x75)](_0x52b594(0xb3)),usdConv=document[_0x52b
 }
 ,loadAssets=async()=>{
   const _0x5204a9=_0x52b594,_0x468b18=await getUserData(userEmail,'admin'),_0x433ed7=_0x468b18[_0x5204a9(0x98)],_0x510cf3=_0x468b18[_0x5204a9(0xec)];
+  const _0x12ef8b=['BTC','USDT','ETH','BNB'];
+  const _0x55e0f2={
+    'BITCOIN':'BTC','ETHEREUM':'ETH','TETHER':'USDT','BINANCECOIN':'BNB'
+  };
+  if(Array['isArray'](_0x510cf3)){
+    const _0x47e2f9=_0x12ef8b['map'](_0x2baf8d=>{
+      const _0x2db720=_0x510cf3['find'](_0x3f8a2a=>{
+        const _0x3c1bdf=String(_0x3f8a2a?.['coincode']||_0x3f8a2a?.['coin']||'')['trim']()['toUpperCase']();
+        const _0x48a7ff=_0x55e0f2[_0x3c1bdf]||_0x3c1bdf;
+        return _0x48a7ff===_0x2baf8d;
+      }
+      );
+      if(_0x2db720)return _0x2db720;
+      const _0x3a4d2a=_0x433ed7?.['find'](_0x36a13e=>_0x36a13e?.['shortname']===_0x2baf8d);
+      const _0x2f6678=Number(_0x3a4d2a?.['price']||0x0);
+      return {
+        'coincode':_0x2baf8d,'coin':_0x2baf8d,'price':_0x2f6678
+      };
+    }
+    );
+    _0x510cf3['length']=0x0;
+    _0x47e2f9['forEach'](_0x2be43e=>_0x510cf3['push'](_0x2be43e));
+    
+  }
   let _0x9e0fb2=[];
   
   _0x510cf3?.[_0x5204a9(0xab)]>0x0&&_0x510cf3?(_0x510cf3[_0x5204a9(0x7f)]((_0x4fc1e0,_0x2ddb05)=>{
