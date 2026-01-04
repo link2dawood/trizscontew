@@ -32,7 +32,16 @@
     return found || normalized || coinId.toUpperCase();
   };
 
-  const getEndpoint = () => window.livePricesEndpoint || '../crypto_api.php';
+  const getEndpoint = () => {
+    if (window.livePricesEndpoint) {
+      return window.livePricesEndpoint;
+    }
+    const path = String(window.location?.pathname || '');
+    if (path.includes('/user/')) {
+      return 'crypto_api.php';
+    }
+    return 'user/crypto_api.php';
+  };
 
   const ensureLivePrices = () => {
     window.liveCryptoPrices = window.liveCryptoPrices || {};
